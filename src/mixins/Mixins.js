@@ -1,0 +1,20 @@
+import { truncate } from 'lodash'
+
+export default {
+	methods: {
+		shorten(text, len = 25) {
+			return truncate(text, { length: len })
+		},
+		goToUrl(title, id) {
+			let slug = _.trim(
+				_.deburr(title.toLowerCase()) // diacrnpm uitics
+					.replace(/[^\w\s]/gi, '') // special characters
+					.replace(/ {2,}/g, ' ') // repeating spaces
+					.replace(/ /g, '-'), // space to -
+				'-' // trailing -
+			)
+			this.$router.push({ path: '/movie/' + slug, query: { id } })
+			// this.$root.$emit("single-movie-show-id", id);
+		}
+	}
+}

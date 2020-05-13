@@ -1,32 +1,71 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
-  </div>
+  <v-app id="app" dark>
+    <navigation />
+    <v-container>
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
+      <fast-movie-preview />
+    </v-container>
+  </v-app>
 </template>
 
-<style lang="scss">
+<script>
+import Navigation from "./components/Navigation";
+import FastMoviePreview from "./components/FastMoviePreview";
+
+export default {
+  name: "App",
+  data() {
+    return {
+      // showPreview: false,
+    };
+  },
+  components: {
+    Navigation,
+    FastMoviePreview,
+  },
+  // methods: {
+  //   showFastPreview() {
+  //     this.showPreview = true;
+  //   },
+  //   showFastPreviewTurn() {
+  //     if (this.showPreview) {
+  //       this.showPreview = false;
+  //     } else {
+  //       this.showPreview = true;
+  //     }
+  //     // console.log(this.showPreview);
+  //   },
+  // },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "./scss/app.scss";
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  font-family: "Open Sans", sans-serif;
+
+  // font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+}
+.fade-enter {
+  transform: translateX(10px);
+  opacity: 0;
 }
 
-#nav {
-  padding: 30px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.2s ease;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.fade-leave-to {
+  transform: translateX(-10px);
+  opacity: 0;
 }
 </style>

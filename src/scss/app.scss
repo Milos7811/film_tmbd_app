@@ -1,0 +1,15 @@
+@import "mixins";
+@import "general";
+@import "colors";
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: $primary !important;
+  color: $primary-text;
+}
+#app {
+  background-color: $primary;
+  color: $primary-text;
+  font-family: "Open Sans", sans-serif;
+}
