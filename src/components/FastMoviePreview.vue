@@ -39,9 +39,13 @@
 					{{ this.result.title }}
 				</h2>
 				<p class="overview">{{ this.result.overview }}</p>
-				<h3 class="average">
-					Hodnotenie: {{ this.result.vote_average }}
+				<h3 class="average-text">
+					Hodnotenie:
 				</h3>
+				<average-vote
+					class="average-vote"
+					:voteAverage="result.vote_average"
+				/>
 			</article>
 		</main>
 	</transition>
@@ -49,9 +53,11 @@
 
 <script>
 import Mixins from '../mixins/Mixins.js'
+import AverageVote from './AverageVote.vue'
 
 export default {
 	mixins: [Mixins],
+	components: { AverageVote },
 	data() {
 		return {
 			show: false,
@@ -64,14 +70,13 @@ export default {
 			youtubeURL: 'https://www.youtube.com/embed/'
 		}
 	},
-	beforeMount() {
-		this.resetResults()
-	},
+	// beforeMount() {
+	// 	this.resetResults()
+	// },
 	mounted() {
 		this.$root.$on(
 			'hovering-image-id',
-			data => (this.hoveredElementId = data),
-			console.log('po mounte')
+			data => (this.hoveredElementId = data)
 		)
 	},
 	watch: {
@@ -120,25 +125,6 @@ export default {
 				.catch(error => {
 					console.log('error v Axios', error)
 				})
-		},
-		getImage() {
-			try {
-				return (this.fullImagePath =
-					'http://image.tmdb.org/t/p/w500/' + this.result.poster_path)
-				console.log(this.result)
-			} catch (error) {
-				console.log(error)
-			}
-		},
-		getVideo(videoPath) {
-			try {
-				return (this.fulllVideoPath =
-					'https://www.youtube.com/embed/' +
-					videoPath +
-					'?autoplay=1&showinfo=0&enablejsapi=1&origin=http://localhost:9000')
-			} catch (error) {
-				console.log('Error v getVideo')
-			}
 		}
 	}
 }
@@ -200,8 +186,12 @@ export default {
 	margin-top: em(30);
 	line-height: em(25);
 }
-.average {
+.average-text {
 	margin-top: em(30);
+	display: inline-grid;
+}
+.average-vote {
+	display: inline-grid;
 }
 .slide-enter-active,
 .slide-leave-active {

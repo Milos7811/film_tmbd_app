@@ -1,6 +1,6 @@
 <template>
-	<div class="content">
-		<h2 class="title">{{ this.result.title }}</h2>
+	<div v-cloak class="content">
+		<h2 class="title-name">{{ this.result.title }}</h2>
 		<img
 			v-if="!this.fulllVideoPath"
 			class="image"
@@ -13,10 +13,25 @@
 			:src="this.fulllVideoPath"
 		></iframe>
 		<article class="genres">
-			<p v-for="(genre, i) in result.genres" :key="i">
-				{{ genre.name }} |
+			<div class="about">
+				<p class="about-time">{{ result.runtime }} min.</p>
+				<p class="dot">•</p>
+
+				<p class="about-date">{{ result.release_date }}</p>
+				<p class="dot">•</p>
+
+				<p v-for="(genre, i) in result.genres" :key="i">
+					{{ genre.name }} |
+				</p>
+			</div>
+			<p class="vote-average">
+				Hodnotenie:
+				<average-vote
+					v-show="result.id"
+					class="vote-average-vote"
+					:voteAverage="result.vote_average"
+				/>
 			</p>
-			<p class="vote-average">Hodnotenie: {{ result.vote_average }}</p>
 		</article>
 		<main>
 			<img
@@ -26,12 +41,19 @@
 			/>
 			<p class="overview">{{ result.overview }}</p>
 		</main>
+
+		<movie-crew class="movie-crew" :movieId="result.id" />
 	</div>
 </template>
 
 <script>
+import Mixins from '../mixins/Mixins.js'
+import AverageVote from './AverageVote.vue'
+import MovieCrew from './MovieCrew.vue'
 export default {
 	name: 'SingleMovieShow',
+	mixins: [Mixins],
+	components: { AverageVote, MovieCrew },
 	data() {
 		return {
 			youtubeURL: 'https://www.youtube.com/embed/',
@@ -39,8 +61,16 @@ export default {
 			fulllVideoPath: '',
 			fullImagePath: '',
 			result: '',
-			language: 'sk'
+			language: 'sk',
+			isActive: false
 		}
+	},
+	watch: {
+		// isActive(value) {
+		// 	if (value) {
+		// 		console.log(this.isActive)
+		// 	}
+		// }
 	},
 	created() {
 		this.getResult()
@@ -70,25 +100,6 @@ export default {
 				.catch(error => {
 					console.log('error v Axios', error)
 				})
-		},
-		getImage() {
-			try {
-				return (this.fullImagePath =
-					'http://image.tmdb.org/t/p/w500/' + this.result.poster_path)
-				console.log(this.result)
-			} catch (error) {
-				console.log(error)
-			}
-		},
-		getVideo(videoPath) {
-			try {
-				return (this.fulllVideoPath =
-					'https://www.youtube.com/embed/' +
-					videoPath +
-					'?autoplay=1&showinfo=0&enablejsapi=1&origin=http://localhost:9000')
-			} catch (error) {
-				console.log('Error v getVideo')
-			}
 		}
 	}
 }
@@ -96,6 +107,10 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+
+.movie-crew {
+	margin-top: em(40);
+}
 
 main {
 	margin-top: em(40);
@@ -109,29 +124,35 @@ main {
 		// @include clearfix;
 		width: 50%;
 		margin: auto;
-		margin-top: em(80);
+		margin-top: em(0);
 		line-height: em(30);
 	}
 }
 
-h2 {
-	.title {
-		font-size: em(60) !important;
-		margin: em(50, 40) em(0);
-	}
+.title-name {
+	font-size: em(30) !important;
+	margin: em(30, 30) em(0);
 }
 
 .genres {
 	margin-top: em(30);
-	// float: left;
-	p {
-		display: inline-block;
+	.about {
+		display: inline-flex;
 		float: left;
+		.dot {
+			margin: 0 em(5);
+		}
 	}
 	.vote-average {
 		font-size: em(30);
 		float: right;
 		line-height: em(15);
+		margin-right: em(10);
+		.vote-average-vote {
+			display: inline-grid;
+			font-size: em(20, 30);
+			transform: scale(1.5);
+		}
 	}
 }
 

@@ -1,33 +1,40 @@
 <template>
 	<div>
-		<v-progress-circular
+		<!-- <v-progress-circular
 			v-if="!this.results"
 			:size="50"
 			color="primary"
 			indeterminate
-		></v-progress-circular>
+		></v-progress-circular> -->
 		<v-sheet
 			class="mx-auto "
 			elevation="12"
 			dark
 			:max-width="this.windowWidth"
-			v-if="this.results"
 		>
-			<v-slide-group class="pa-4" center-active dark>
+			<v-slide-group class="slider-group" center-active>
 				<v-slide-item
 					v-for="result in results"
 					:key="result.id"
-					v-slot:default="{ active }"
+					v-slot:default="{}"
 				>
 					<div
 						@click="
 							goToUrl(result.title, result.id), stopHovering()
 						"
 					>
+						<v-skeleton-loader
+							v-show="skeleton"
+							ref="skeleton"
+							type="image"
+							class=" ma-5"
+							width="100"
+							height="150"
+						></v-skeleton-loader>
 						<v-card
+							v-show="!skeleton"
 							dark
-							:color="active ? 'primary' : 'grey lighten-1'"
-							class="ma-4"
+							class="ma-3"
 							height="150"
 							width="100"
 							v-on:mouseover="showHovered(result.id)"
@@ -41,12 +48,10 @@
 								"
 								ref="cardMouseOver"
 							/>
-							<v-row
-								class="fill-height"
-								align="center"
-								justify="center"
-							>
-							</v-row>
+							<average-vote
+								class="vote-average"
+								:voteAverage="result.vote_average"
+							></average-vote>
 						</v-card>
 					</div>
 				</v-slide-item>
@@ -58,23 +63,30 @@
 <script>
 import { trim, deburr, debounce } from 'lodash'
 import Mixins from '../mixins/Mixins.js'
-// import ProgresCircle from "../components/ProgresCircle";
+import AverageVote from './AverageVote.vue'
 export default {
 	mixins: [Mixins],
 	props: ['results'],
+	components: { AverageVote },
 
 	data() {
 		return {
 			showArrow: false,
 			windowWidth: '',
 			hovering: false,
-			hoveredImageId: ''
+			hoveredImageId: '',
+			skeleton: true
 		}
 	},
 	watch: {
 		hovering() {
 			this.sendId
 		}
+	},
+	mounted() {
+		setTimeout(() => {
+			this.skeleton = false
+		}, 2000)
 	},
 
 	methods: {
@@ -101,18 +113,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+.vote-average {
+	margin-top: em(-30);
+}
+.slider-group {
+	padding: 0px;
+}
 v-item-group {
 	height: 150px;
 }
 .image {
 	width: 100px;
 	height: 150px;
-	border: 1px solid $border-color;
-	border-radius: em(10);
 	&:hover {
+		transition: all 0.2s;
 		transform: scale(1.1);
-		border: em(2) solid $border-color;
-		border-radius: em(10);
 	}
 }
 .v-icon {

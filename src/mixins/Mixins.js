@@ -15,6 +15,25 @@ export default {
 			)
 			this.$router.push({ path: '/movie/' + slug, query: { id } })
 			// this.$root.$emit("single-movie-show-id", id);
+		},
+		getImage() {
+			try {
+				return (this.fullImagePath =
+					'http://image.tmdb.org/t/p/w500/' + this.result.poster_path)
+				console.log(this.result)
+			} catch (error) {
+				console.log(error)
+			}
+		},
+		getVideo(videoPath) {
+			try {
+				return (this.fulllVideoPath =
+					'https://www.youtube.com/embed/' +
+					videoPath +
+					'?autoplay=1&showinfo=0&enablejsapi=1&origin=http://localhost:9000')
+			} catch (error) {
+				console.log('Error v getVideo')
+			}
 		}
 	}
 }

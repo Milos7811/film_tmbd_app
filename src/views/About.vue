@@ -1,22 +1,33 @@
 <template>
-	<div class="about">
-		<h1>This is an about page</h1>
-		<!-- <v-app id="inspire"> -->
-		<!-- <v-container fluid> -->
-		<v-progress-circular
-			:size="50"
-			color="primary"
-			indeterminate
-		></v-progress-circular>
-	</div>
+	<v-skeleton-loader
+		ref="skeleton"
+		type="image"
+		class="mx-auto"
+		width="150"
+		height="200"
+	></v-skeleton-loader>
 </template>
 <script>
+// import AverageVote from '../components/AverageVote.vue'
 export default {
+	// components: { AverageVote },
 	data() {
 		return {
-			switch1: true,
-			switch2: false
+			loading: false
+		}
+	},
+	watch: {
+		isActive(value) {
+			console.log(value)
 		}
 	}
 }
 </script>
+<style lang="scss" scoped>
+.ahoj {
+	margin-top: 2000px;
+}
+.okno {
+	// min-height: 100%;
+}
+</style>
