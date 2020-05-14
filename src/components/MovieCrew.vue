@@ -1,6 +1,6 @@
 <template>
 	<div height="200vh">
-		<h2>Hlavne obsadenie</h2>
+		<h1 class="title">Hlavne obsadenie</h1>
 		<v-lazy
 			v-model="isActive"
 			:options="{

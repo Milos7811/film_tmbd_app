@@ -14,7 +14,7 @@
 		></iframe>
 		<article class="genres">
 			<div class="about">
-				<p class="about-time">{{ result.runtime }} min.</p>
+				<p class="about-time">{{ result.runtime }} min</p>
 				<p class="dot">•</p>
 
 				<p class="about-date">{{ result.release_date }}</p>
