@@ -6,12 +6,13 @@
 			class="image"
 			v-bind:src="this.fullImagePath"
 		/>
-		<iframe
-			v-if="this.fulllVideoPath"
-			class="video-player"
-			frameborder="0"
-			:src="this.fulllVideoPath"
-		></iframe>
+		<div class="video-wraper" v-if="this.fulllVideoPath">
+			<iframe
+				class="video-player"
+				frameborder="0"
+				:src="this.fulllVideoPath"
+			></iframe>
+		</div>
 		<article class="genres">
 			<div class="about">
 				<p class="about-time">{{ result.runtime }} min</p>
@@ -33,7 +34,7 @@
 				/>
 			</p>
 		</article>
-		<main>
+		<main class="overview-image">
 			<img
 				v-if="this.fulllVideoPath"
 				class="side-image"
@@ -65,13 +66,7 @@ export default {
 			isActive: false
 		}
 	},
-	watch: {
-		// isActive(value) {
-		// 	if (value) {
-		// 		console.log(this.isActive)
-		// 	}
-		// }
-	},
+
 	created() {
 		this.getResult()
 	},
@@ -116,7 +111,7 @@ main {
 	margin-top: em(40);
 	display: inline-flex;
 	width: 100%;
-	height: 35%;
+	height: auto;
 	.side-image {
 		position: relative;
 	}
@@ -155,12 +150,16 @@ main {
 		}
 	}
 }
-
-.video-player {
-	width: 70%;
-	height: 41%;
+.video-wraper {
+	max-width: 70%;
+	height: 58%;
 	margin: auto;
-	display: block;
+	.video-player {
+		min-width: 100%;
+		min-height: 100%;
+		margin: auto;
+		display: block;
+	}
 }
 .content {
 	width: 100%;
@@ -171,6 +170,7 @@ img {
 	width: 20%;
 }
 .side-image {
-	width: 15%;
+	max-width: em(150);
+	max-height: em(220);
 }
 </style>

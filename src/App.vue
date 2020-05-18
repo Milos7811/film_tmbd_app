@@ -17,9 +17,7 @@ import FastMoviePreview from './components/FastMoviePreview'
 export default {
 	name: 'App',
 	data() {
-		return {
-			// showPreview: false,
-		}
+		return {}
 	},
 	components: {
 		Navigation,

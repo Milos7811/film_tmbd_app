@@ -6,13 +6,13 @@
 			color="primary"
 			indeterminate
 		></v-progress-circular> -->
-		<v-sheet
-			class="mx-auto "
-			elevation="12"
-			dark
-			:max-width="this.windowWidth"
-		>
-			<v-slide-group class="slider-group" center-active>
+		<v-sheet class="mx-auto " elevation="6" dark max-width="1240">
+			<v-slide-group
+				mobile-break-point="560"
+				class="slider-group"
+				center-active
+				aria-hidden="false"
+			>
 				<v-slide-item
 					v-for="result in results"
 					:key="result.id"

@@ -48,8 +48,8 @@ export default {
 		this.getResult()
 	},
 	methods: {
-		getResult() {
-			this.$axios
+		async getResult() {
+			await this.$axios
 				.get(
 					`https://api.themoviedb.org/3/trending/movie/${this.timeWindow}?api_key=810893a24970b82571f7a24c2decfab4`
 				)
@@ -72,7 +72,7 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/app.scss';
 .title {
-	float: left;
+	margin: auto;
 	h2 {
 		display: inline;
 

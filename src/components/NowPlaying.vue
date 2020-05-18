@@ -17,13 +17,18 @@ export default {
 		}
 	},
 	mounted() {
-		this.$axios
-			.get(
-				`https://api.themoviedb.org/3/movie/now_playing?api_key=810893a24970b82571f7a24c2decfab4&language=sk&page=1&region=sk`
-			)
-			.then(response => {
-				this.results = response.data.results
-			})
+		this.getResult()
+	},
+	methods: {
+		async getResult() {
+			await this.$axios
+				.get(
+					`https://api.themoviedb.org/3/movie/now_playing?api_key=810893a24970b82571f7a24c2decfab4&language=sk&page=1&region=sk`
+				)
+				.then(response => {
+					this.results = response.data.results
+				})
+		}
 	}
 }
 </script>
@@ -31,7 +36,7 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/app.scss';
 .title {
-	float: left;
+	margin: auto;
 }
 .slider {
 	clear: both;

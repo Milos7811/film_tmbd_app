@@ -31,9 +31,13 @@
 				:src="this.fulllVideoPath"
 			></iframe>
 
-			<article :to="`/single`">
+			<article>
 				<h2
-					@click="goToUrl(result.title, result.id), (show = false)"
+					@click="
+						goToUrl(result.title, result.id),
+							(show = false),
+							resetResults()
+					"
 					class="title"
 				>
 					{{ this.result.title }}
@@ -99,6 +103,7 @@ export default {
 				;(this.result = ''),
 					(this.fulllVideoPath = ''),
 					(this.fullImagePath = '')
+				this.language = 'sk'
 			}, 500)
 		},
 		getResult() {
@@ -146,19 +151,23 @@ export default {
 	display: block;
 	clear: both;
 }
+
 .video-player {
 	max-width: 100%;
+	height: auto;
 	margin: auto;
 	position: relative;
-	// z-index: 10;
 	display: block;
 	clear: both;
 }
+
 .close-icon {
 	color: $primary-text !important;
 	margin: em(10) em(5);
 }
 .content {
+	overflow: auto;
+	position: fixed;
 	cursor: pointer;
 	height: 100%;
 	width: 25%;
@@ -167,7 +176,6 @@ export default {
 	float: left;
 	left: 0px;
 	top: em(60);
-	position: absolute;
 	z-index: 2;
 	padding: em(10);
 	border-right: 1px solid $border-color;
@@ -185,6 +193,9 @@ export default {
 .overview {
 	margin-top: em(30);
 	line-height: em(25);
+}
+article {
+	margin-bottom: em(70);
 }
 .average-text {
 	margin-top: em(30);

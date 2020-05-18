@@ -1,3 +1,4 @@
+@import 'colors';
 * {
 	box-sizing: border-box;
 	font-size: 100%;
@@ -16,4 +17,23 @@ html {
 }
 [v-cloak] {
 	display: none;
+}
+/* width */
+::-webkit-scrollbar {
+	width: em(3);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: $navbar;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $primary;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: $primary;
 }

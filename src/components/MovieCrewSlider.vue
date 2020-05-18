@@ -7,7 +7,12 @@
 			indeterminate
 		></v-progress-circular>
 		<v-sheet class="mx-auto " elevation="12" dark v-if="this.results">
-			<v-slide-group class="slider-group" center-active>
+			<v-slide-group
+				class="slider-group"
+				center-active
+				mobile-break-point="560"
+				aria-hidden="false"
+			>
 				<v-slide-item
 					v-for="result in results.cast"
 					:key="result.id"

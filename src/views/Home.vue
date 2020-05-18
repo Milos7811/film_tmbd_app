@@ -1,5 +1,5 @@
 <template>
-	<div class="home" v-cloak>
+	<div class="home container" v-cloak>
 		<search />
 		<popular />
 		<now-playing />
