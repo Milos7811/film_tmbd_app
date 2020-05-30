@@ -1,27 +1,29 @@
 <template>
-	<div class="popular">
-		<h2 class="title" :v-model="timeWindow">
-			Populárne tento
-			<h2
-				@click=";(timeWindow = 'day'), toogleDay()"
-				:class="{ 'active-timeWindow': timeWindowDay }"
-			>
-				deň
+	<transition out-in>
+		<div class="popular">
+			<h2 class="title" :v-model="timeWindow">
+				Populárne tento
+				<h2
+					@click=";(timeWindow = 'day'), toogleDay()"
+					:class="{ 'active-timeWindow': timeWindowDay }"
+				>
+					deň
+				</h2>
+				|
+				<h2
+					@click="
+						;((timeWindow = 'week'), toogleWeek()),
+							(timeWindowWeek = true)
+					"
+					v-bind:class="{ 'active-timeWindow': timeWindowWeek }"
+				>
+					týždeň
+				</h2>
 			</h2>
-			|
-			<h2
-				@click="
-					;((timeWindow = 'week'), toogleWeek()),
-						(timeWindowWeek = true)
-				"
-				v-bind:class="{ 'active-timeWindow': timeWindowWeek }"
-			>
-				týždeň
-			</h2>
-		</h2>
 
-		<slider class="slider" :results="this.results" />
-	</div>
+			<slider class="slider" :results="this.results" />
+		</div>
+	</transition>
 </template>
 
 <script>

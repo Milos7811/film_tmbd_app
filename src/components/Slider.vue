@@ -1,16 +1,9 @@
 <template>
 	<div>
-		<!-- <v-progress-circular
-			v-if="!this.results"
-			:size="50"
-			color="primary"
-			indeterminate
-		></v-progress-circular> -->
-		<v-sheet class="mx-auto " elevation="6" dark max-width="1240">
+		<v-sheet class="mx-auto sheet " elevation="8" dark max-width="1240">
 			<v-slide-group
 				mobile-break-point="560"
 				class="slider-group"
-				center-active
 				aria-hidden="false"
 			>
 				<v-slide-item
@@ -32,6 +25,7 @@
 							height="150"
 						></v-skeleton-loader>
 						<v-card
+							v-if="result.poster_path"
 							v-show="!skeleton"
 							dark
 							class="ma-3"
@@ -41,12 +35,18 @@
 							v-on:mouseout="stopHovering"
 						>
 							<img
+								v-if="result.poster_path"
 								class="image"
 								v-bind:src="
 									'http://image.tmdb.org/t/p/w500/' +
 										result.poster_path
 								"
 								ref="cardMouseOver"
+							/>
+							<img
+								v-else
+								src="../assets/empty_image.png"
+								alt=""
 							/>
 							<average-vote
 								class="vote-average"
@@ -73,8 +73,7 @@ export default {
 		return {
 			showArrow: false,
 			windowWidth: '',
-			hovering: false,
-			hoveredImageId: '',
+
 			skeleton: true
 		}
 	},
@@ -83,38 +82,17 @@ export default {
 			this.sendId
 		}
 	},
-	mounted() {
+	created() {
 		setTimeout(() => {
 			this.skeleton = false
-		}, 2000)
-	},
-
-	methods: {
-		showHovered(image) {
-			this.timeout = setTimeout(() => {
-				this.hovering = true
-				this.hoveredImageId = image
-				this.sendId()
-			}, 2000)
-		},
-		stopHovering() {
-			setTimeout(() => {
-				this.hovering = false
-				this.hoveredImageId = ''
-				this.sendId()
-			}, 500)
-			clearTimeout(this.timeout)
-		},
-		sendId() {
-			this.$root.$emit('hovering-image-id', this.hoveredImageId)
-		}
+		}, 1000)
 	}
 }
 </script>
 <style lang="scss" scoped>
 @import '../scss/app.scss';
-.vote-average {
-	margin-top: em(-30);
+.sheet {
+	display: flex;
 }
 .slider-group {
 	padding: 0px;

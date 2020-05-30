@@ -24,6 +24,13 @@
 				class="image"
 				v-bind:src="this.fullImagePath"
 			/>
+			<img
+				class="image-holder"
+				v-if="!this.fullImagePath && !this.fulllVideoPath"
+				src="../assets/empty_image.png"
+				alt=""
+			/>
+
 			<iframe
 				v-if="this.fulllVideoPath"
 				class="video-player"

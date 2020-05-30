@@ -25,12 +25,12 @@ html {
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: $navbar;
+	background: $primary;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: $primary;
+	background: $navbar;
 }
 
 /* Handle on hover */

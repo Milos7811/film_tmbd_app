@@ -6,7 +6,7 @@
 				<router-link to="/about">About</router-link>
 				<router-link to="/search">Search</router-link>
 			</div>
-			<div class="search-bar">
+			<!-- <div class="search-bar">
 				<transition name="fade">
 					<input
 						v-if="showSearch"
@@ -23,7 +23,7 @@
 					right
 					>{{ iconMagnify }}</v-icon
 				>
-			</div>
+			</div> -->
 		</div>
 	</nav>
 </template>

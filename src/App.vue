@@ -33,7 +33,7 @@ export default {
 	z-index: 20;
 }
 .router-view {
-	margin-top: em(60);
+	margin-top: em(60) !important;
 }
 
 #app {

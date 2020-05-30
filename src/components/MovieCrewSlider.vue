@@ -14,11 +14,17 @@
 				aria-hidden="false"
 			>
 				<v-slide-item
-					v-for="result in results.cast"
-					:key="result.id"
+					v-for="(result, i) in results.cast"
+					:key="i"
 					v-slot:default="{}"
 				>
-					<v-card dark class="ma-3 card" height="250" width="100">
+					<v-card
+						dark
+						class="ma-3 card"
+						height="250"
+						width="100"
+						@click="goToUrlPerson(result.name, result.id)"
+					>
 						<img
 							v-if="result.profile_path"
 							class="image"
@@ -40,13 +46,6 @@
 						<p class="character-name">
 							{{ shorten(result.character) }}
 						</p>
-
-						<!-- <v-row
-							class="fill-height"
-							align="center"
-							justify="center"
-						>
-						</v-row> -->
 					</v-card>
 				</v-slide-item>
 			</v-slide-group>
@@ -58,7 +57,19 @@
 import Mixins from '../mixins/Mixins'
 export default {
 	props: ['results'],
-	mixins: [Mixins]
+	mixins: [Mixins],
+	methods: {
+		// goToUrlPerson(name, id) {
+		// 	let slug = _.trim(
+		// 		_.deburr(name.toLowerCase()) // diacrnpm uitics
+		// 			.replace(/[^\w\s]/gi, '') // special characters
+		// 			.replace(/ {2,}/g, ' ') // repeating spaces
+		// 			.replace(/ /g, '-'), // space to -
+		// 		'-' // trailing -
+		// 	)
+		// 	this.$router.push({ path: '/person/' + slug, query: { id } })
+		// }
+	}
 }
 </script>
 

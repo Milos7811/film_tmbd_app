@@ -1,5 +1,5 @@
-<template>
-	<div height="200vh">
+<template >
+	<div v-if="this.results.cast[0]" min-height="200">
 		<h1 class="title">Hlavne obsadenie</h1>
 		<v-lazy
 			v-model="isActive"
@@ -40,7 +40,6 @@ export default {
 				)
 				.then(response => {
 					this.results = response.data
-					// console.log(this.results)
 				})
 		}
 	}

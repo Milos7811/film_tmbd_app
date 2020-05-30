@@ -1,60 +1,70 @@
 <template>
-	<div v-cloak class="content">
-		<h2 class="title-name">{{ this.result.title }}</h2>
-		<img
-			v-if="!this.fulllVideoPath"
-			class="image"
-			v-bind:src="this.fullImagePath"
-		/>
-		<div class="video-wraper" v-if="this.fulllVideoPath">
-			<iframe
-				class="video-player"
-				frameborder="0"
-				:src="this.fulllVideoPath"
-			></iframe>
-		</div>
-		<article class="genres">
-			<div class="about">
-				<p class="about-time">{{ result.runtime }} min</p>
-				<p class="dot">•</p>
-
-				<p class="about-date">{{ result.release_date }}</p>
-				<p class="dot">•</p>
-
-				<p v-for="(genre, i) in result.genres" :key="i">
-					{{ genre.name }} |
-				</p>
-			</div>
-			<p class="vote-average">
-				Hodnotenie:
-				<average-vote
-					v-show="result.id"
-					class="vote-average-vote"
-					:voteAverage="result.vote_average"
-				/>
-			</p>
-		</article>
-		<main class="overview-image">
+	<transition name="rerender" mode="out-in">
+		<div v-cloak class="content">
+			<h2 class="title-name">{{ this.result.title }}</h2>
 			<img
-				v-if="this.fulllVideoPath"
-				class="side-image"
+				v-if="!this.fulllVideoPath && this.fullImagePath"
+				class="image"
 				v-bind:src="this.fullImagePath"
 			/>
-			<p class="overview">{{ result.overview }}</p>
-		</main>
+			<div class="video-wraper" v-if="this.fulllVideoPath">
+				<iframe
+					class="video-player"
+					frameborder="0"
+					:src="this.fulllVideoPath"
+				></iframe>
+			</div>
+			<article class="genres">
+				<div class="about">
+					<p class="about-date" v-if="this.result.release_date">
+						{{ releaseData }}
+						<span class="dot">•</span>
+					</p>
 
-		<movie-crew class="movie-crew" :movieId="result.id" />
-	</div>
+					<p class="about-time" v-if="this.result.runtime">
+						{{ result.runtime }} min
+						<span class="dot">•</span>
+					</p>
+
+					<p v-for="(genre, i) in result.genres" :key="i">
+						{{ genre.name }} |
+					</p>
+				</div>
+				<p class="vote-average-wrap">
+					Hodnotenie:
+					<average-vote
+						v-show="result.id"
+						class="vote-average-vote"
+						:voteAverage="result.vote_average"
+					/>
+				</p>
+			</article>
+			<main class="overview-image">
+				<img
+					v-if="this.fulllVideoPath"
+					class="side-image"
+					v-bind:src="this.fullImagePath"
+				/>
+				<p class="overview">{{ result.overview }}</p>
+			</main>
+
+			<movie-crew class="movie-crew" :movieId="result.id" />
+
+			<movie-similar :movieId="result.id" />
+		</div>
+	</transition>
 </template>
 
 <script>
+import moment from 'moment'
 import Mixins from '../mixins/Mixins.js'
 import AverageVote from './AverageVote.vue'
 import MovieCrew from './MovieCrew.vue'
+import MovieSimilar from './MovieSimilar'
 export default {
 	name: 'SingleMovieShow',
 	mixins: [Mixins],
-	components: { AverageVote, MovieCrew },
+	components: { AverageVote, MovieCrew, MovieSimilar },
 	data() {
 		return {
 			youtubeURL: 'https://www.youtube.com/embed/',
@@ -62,15 +72,32 @@ export default {
 			fulllVideoPath: '',
 			fullImagePath: '',
 			result: '',
-			language: 'sk',
-			isActive: false
+			language: 'sk'
+		}
+	},
+	computed: {
+		releaseData() {
+			return moment(this.result.release_date).format('DD MMM YYYY')
 		}
 	},
 
 	created() {
 		this.getResult()
 	},
+
+	watch: {
+		$route: {
+			handler: function(id) {
+				this.reset()
+			}
+		}
+	},
+
 	methods: {
+		reset() {
+			Object.assign(this.$data, this.$options.data())
+			this.getResult()
+		},
 		getResult() {
 			this.$axios
 				.get(
@@ -138,7 +165,7 @@ main {
 			margin: 0 em(5);
 		}
 	}
-	.vote-average {
+	.vote-average-wrap {
 		font-size: em(30);
 		float: right;
 		line-height: em(15);
@@ -172,5 +199,19 @@ img {
 .side-image {
 	max-width: em(150);
 	max-height: em(220);
+}
+.rerender-enter {
+	transform: translateX(10px);
+	opacity: 0;
+}
+
+.rerender-enter-active,
+.rerender-leave-active {
+	transition: all 0.2s ease;
+}
+
+.rerender-leave-to {
+	transform: translateX(-10px);
+	opacity: 0;
 }
 </style>
