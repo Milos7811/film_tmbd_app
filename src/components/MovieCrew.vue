@@ -1,5 +1,5 @@
 <template >
-	<div v-if="this.results.cast[0]" min-height="200">
+	<div v-if="this.results.cast" min-height="200">
 		<h1 class="title">Hlavne obsadenie</h1>
 		<v-lazy
 			v-model="isActive"
@@ -17,7 +17,7 @@
 <script>
 import MovieCrewSlider from './MovieCrewSlider'
 export default {
-	props: ['movieId'],
+	props: ['movieId', 'type'],
 	components: { MovieCrewSlider },
 	data() {
 		return {
@@ -36,7 +36,7 @@ export default {
 		getResult() {
 			this.$axios
 				.get(
-					`https://api.themoviedb.org/3/movie/${this.movieId}/credits?api_key=810893a24970b82571f7a24c2decfab4`
+					`https://api.themoviedb.org/3/${this.type}/${this.movieId}/credits?api_key=810893a24970b82571f7a24c2decfab4`
 				)
 				.then(response => {
 					this.results = response.data

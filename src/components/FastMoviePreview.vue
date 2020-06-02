@@ -20,15 +20,9 @@
 			</article>
 
 			<img
-				v-if="!this.fulllVideoPath"
+				v-if="!this.fulllVideoPath && this.result.poster_path"
 				class="image"
 				v-bind:src="this.fullImagePath"
-			/>
-			<img
-				class="image-holder"
-				v-if="!this.fullImagePath && !this.fulllVideoPath"
-				src="../assets/empty_image.png"
-				alt=""
 			/>
 
 			<iframe
@@ -81,9 +75,7 @@ export default {
 			youtubeURL: 'https://www.youtube.com/embed/'
 		}
 	},
-	// beforeMount() {
-	// 	this.resetResults()
-	// },
+
 	mounted() {
 		this.$root.$on(
 			'hovering-image-id',
@@ -103,6 +95,11 @@ export default {
 				this.resetResults()
 			}
 		}
+		// $route(to, from) {
+		// 	console.log('zmena routera')
+
+		// 	this.resetResults()
+		// }
 	},
 	methods: {
 		resetResults() {
@@ -110,6 +107,7 @@ export default {
 				;(this.result = ''),
 					(this.fulllVideoPath = ''),
 					(this.fullImagePath = '')
+				this.show = false
 				this.language = 'sk'
 			}, 500)
 		},

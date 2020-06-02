@@ -1,12 +1,11 @@
 <template>
-	<!-- <div class="search"> -->
 	<ul class="list">
 		<a
 			tag="li"
 			:to="`/single`"
 			v-for="result in results"
 			:key="result.id"
-			@click="goToUrl(result.title, result.id)"
+			@click="goToUrlSeries(result.name, result.id)"
 		>
 			<v-card
 				class="mx-auto card"
@@ -35,12 +34,13 @@
 						class="vote-average"
 						:voteAverage="result.vote_average"
 					/>
-					<p class="fast-title">{{ shorten(result.title) }}</p>
+					<p class="fast-title">
+						{{ shorten(result.name) }}
+					</p>
 				</div>
 			</v-card>
 		</a>
 	</ul>
-	<!-- </div> -->
 </template>
 
 <script>
@@ -66,7 +66,6 @@ export default {
 	display: block;
 }
 ul {
-	// display: block;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;

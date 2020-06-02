@@ -23,8 +23,9 @@
 
 		<div class="wrapper-search">
 			<transition name="fade " mode="out-in">
-				<search-movies v-if="this.movies" />
-				<search-people v-if="this.people" />
+				<search-movies id="movies" v-if="this.movies" />
+				<search-people id="people" v-if="this.people" />
+				<search-series id="series" v-if="this.series" />
 			</transition>
 		</div>
 	</div>
@@ -33,8 +34,9 @@
 <script>
 import SearchPeople from '../components/SearchPeople'
 import SearchMovies from '../components/SearchMovies'
+import SearchSeries from '../components/SearchSeries'
 export default {
-	components: { SearchMovies, SearchPeople },
+	components: { SearchMovies, SearchPeople, SearchSeries },
 	data() {
 		return {
 			movies: true,

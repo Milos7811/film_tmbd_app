@@ -6,24 +6,6 @@
 				<router-link to="/about">About</router-link>
 				<router-link to="/search">Search</router-link>
 			</div>
-			<!-- <div class="search-bar">
-				<transition name="fade">
-					<input
-						v-if="showSearch"
-						class="search-input"
-						v-model="query"
-						type="text"
-						placeholder="Fast search"
-					/>
-				</transition>
-				<v-icon
-					@click="toogleSearch"
-					class="magnify-icon"
-					size="35"
-					right
-					>{{ iconMagnify }}</v-icon
-				>
-			</div> -->
 		</div>
 	</nav>
 </template>

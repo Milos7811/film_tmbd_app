@@ -68,6 +68,16 @@ export default {
 				'-' // trailing -
 			)
 			this.$router.push({ path: '/person/' + slug, query: { id } })
+		},
+		goToUrlSeries(name, id) {
+			let slug = _.trim(
+				_.deburr(name.toLowerCase()) // diacrnpm uitics
+					.replace(/[^\w\s]/gi, '') // special characters
+					.replace(/ {2,}/g, ' ') // repeating spaces
+					.replace(/ /g, '-'), // space to -
+				'-' // trailing -
+			)
+			this.$router.push({ path: '/series/' + slug, query: { id } })
 		}
 	}
 }

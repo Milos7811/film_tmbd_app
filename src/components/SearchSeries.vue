@@ -1,7 +1,7 @@
 <template>
-	<div class="main">
+	<div>
 		<div class="inputs-wrapper">
-			<search-genres class="input" />
+			<search-genres />
 			<v-select
 				v-model="selectYear"
 				:items="yearsGenerator"
@@ -14,7 +14,7 @@
 			</v-select>
 			<search-sort-by />
 		</div>
-		<movie-list :results="this.results" />
+		<series-list :results="this.results" />
 		<v-pagination
 			class="pagination"
 			v-if="this.pageLength > 1"
@@ -27,37 +27,33 @@
 </template>
 
 <script>
-import { debounce } from 'lodash'
 import SearchGenres from '../components/SearchGenres'
-import MovieList from '../components/MovieList'
 import SearchSortBy from '../components/SearchSortBy'
+import SeriesList from '../components/SeriesList'
 export default {
-	components: { SearchGenres, MovieList, SearchSortBy },
+	components: { SearchGenres, SearchSortBy, SeriesList },
 	data() {
 		return {
-			results: '',
-			movieName: '',
-			genresId: 28,
-			selectYear: '',
 			pageLength: '',
+			selectYear: '',
+			sortBy: 'popularity.desc',
+			genresId: 80,
 			page: 1,
-			sortBy: 'popularity.desc'
+			results: ''
 		}
 	},
 	watch: {
-		selectYear() {
-			this.getResult()
-		},
 		page() {
 			this.getResult()
 		},
 		sortBy() {
-			if (this.results) {
-				this.getResult()
-			}
+			this.getResult()
+		},
+		selectYear() {
+			console.log(this.selectYear)
+			this.getResult()
 		}
 	},
-
 	mounted() {
 		this.$root.$on('search-genres-id', data => {
 			this.genresId = data
@@ -69,18 +65,21 @@ export default {
 		this.getResult()
 	},
 	methods: {
-		search: debounce(function() {
-			this.getResult()
-		}, 500),
 		getResult() {
+			let resultsArray = []
 			this.$axios
 				.get(
-					`https://api.themoviedb.org/3/discover/movie?api_key=810893a24970b82571f7a24c2decfab4&language=sk-SK&sort_by=${this.sortBy}&include_adult=false&include_video=false&page=1&primary_release_year=${this.selectYear}&with_genres=${this.genresId}&page=${this.page}`
+					`https://api.themoviedb.org/3/discover/tv?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&sort_by=${this.sortBy}&first_air_date_year=${this.selectYear}&page=${this.page}&with_genres=${this.genresId}&include_null_first_air_dates=false`
 				)
 				.then(response => {
-					this.results = response.data.results
+					response.data.results.forEach(element => {
+						if (element.overview) {
+							resultsArray.push(element)
+						}
+					})
 					this.pageLength = response.data.total_pages
 				})
+				.then((this.results = resultsArray))
 		}
 	},
 	computed: {
@@ -106,13 +105,6 @@ export default {
 	height: em(48);
 	margin-top: em(5);
 	padding: em(0) !important;
-}
-.pagination {
-	margin-top: em(30);
-	color: $navbar;
-}
-.main {
-	display: block;
 }
 .inputs-wrapper {
 	height: em(48);

@@ -6,6 +6,7 @@
 		item-value="value"
 		:menu-props="{ top: false, offsetY: true }"
 		label="Zoradiť"
+		width="250"
 		height="48"
 		class="select"
 		solo
@@ -36,6 +37,14 @@ export default {
 					name: 'Dátum vydania od najstaršieho',
 					value: 'release_date.asc'
 				}
+				// {
+				// 	name: 'Názov (A-Z)',
+				// 	value: 'original_title.desc'
+				// },
+				// {
+				// 	name: 'Názov (Z-A)',
+				// 	value: 'original_title.asc'
+				// }
 			],
 			selectedSortBy: ''
 		}
@@ -52,7 +61,7 @@ export default {
 @import '../scss/app.scss';
 .select {
 	border-radius: em(20);
-	max-width: em(150);
+	width: em(250) !important;
 	height: em(48);
 	margin-top: em(5);
 	padding: em(0) !important;

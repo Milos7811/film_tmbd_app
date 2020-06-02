@@ -2,11 +2,13 @@
 	<transition name="rerender" mode="out-in">
 		<div v-cloak class="content">
 			<h2 class="title-name">{{ this.result.title }}</h2>
+			<!-- <div class="image" v-if="this.result.poster_path"> -->
 			<img
-				v-if="!this.fulllVideoPath && this.fullImagePath"
+				v-if="!this.fulllVideoPath && this.result.poster_path"
 				class="image"
 				v-bind:src="this.fullImagePath"
 			/>
+			<!-- </div>  -->
 			<div class="video-wraper" v-if="this.fulllVideoPath">
 				<iframe
 					class="video-player"
@@ -48,9 +50,9 @@
 				<p class="overview">{{ result.overview }}</p>
 			</main>
 
-			<movie-crew class="movie-crew" :movieId="result.id" />
+			<movie-crew class="movie-crew" :movieId="result.id" type="movie" />
 
-			<movie-similar :movieId="result.id" />
+			<movie-similar type="movie" :movieId="result.id" />
 		</div>
 	</transition>
 </template>

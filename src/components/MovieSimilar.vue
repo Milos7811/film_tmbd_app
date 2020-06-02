@@ -1,23 +1,15 @@
 <template >
 	<v-responsive v-if="this.results[0]" class="movie-similiar-wrapper">
 		<h1 class="title">Odporúčania</h1>
-		<!-- <v-lazy
-			v-model="isActive"
-			:options="{
-				threshold: 0.5
-			}"
-			transition="fade-transition"
-			min-height="200"
-		> -->
+
 		<slider :results="this.results" />
-		<!-- </v-lazy> -->
 	</v-responsive>
 </template>
 
 <script>
 import Slider from './Slider'
 export default {
-	props: ['movieId'],
+	props: ['movieId', 'type'],
 	components: { Slider },
 	data() {
 		return {
@@ -25,9 +17,7 @@ export default {
 			results: ''
 		}
 	},
-	mounted() {
-		// this.getResult()
-	},
+
 	watch: {
 		movieId(value) {
 			if (value) {
@@ -44,7 +34,7 @@ export default {
 		async getResult(value) {
 			await this.$axios
 				.get(
-					`https://api.themoviedb.org/3/movie/${this.movieId}/similar?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&page=1`
+					`https://api.themoviedb.org/3/${this.type}/${this.movieId}/similar?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&page=1`
 				)
 				.then(response => {
 					this.results = response.data.results
