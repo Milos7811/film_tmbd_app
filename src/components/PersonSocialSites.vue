@@ -49,14 +49,15 @@ export default {
 	},
 	methods: {
 		async getResult() {
-			await this.$axios
-				.get(
+			try {
+				const response = await this.$axios.get(
 					`
-https://api.themoviedb.org/3/person/${this.personId}/external_ids?api_key=810893a24970b82571f7a24c2decfab4&language=en-US`
+					https://api.themoviedb.org/3/person/${this.personId}/external_ids?api_key=${this.$apiKey}&language=en-US`
 				)
-				.then(response => {
-					this.result = response.data
-				})
+				this.result = response.data
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }

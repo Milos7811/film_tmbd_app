@@ -17,19 +17,18 @@ export default {
 		this.getResult()
 	},
 	methods: {
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/person/${this.$route.query.id}?api_key=810893a24970b82571f7a24c2decfab4&language=en-US`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/person/${this.$route.query.id}?api_key=${this.$apiKey}&language=en-US`
 				)
-				.then(response => {
-					this.result = response.data
-					// console.log(this.result)
-				})
+				this.result = response.data
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

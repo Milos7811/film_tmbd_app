@@ -1,6 +1,6 @@
-<template >
+<template>
 	<v-responsive v-if="this.results[0]" class="movie-similiar-wrapper">
-		<h1 class="title">Odporúčania</h1>
+		<h1 class="title">Podobné filmy</h1>
 
 		<slider :results="this.results" />
 	</v-responsive>
@@ -32,16 +32,14 @@ export default {
 
 	methods: {
 		async getResult(value) {
-			await this.$axios
-				.get(
-					`https://api.themoviedb.org/3/${this.type}/${this.movieId}/similar?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&page=1`
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/${this.type}/${this.movieId}/similar?api_key=${this.$apiKey}&language=en-US&page=1`
 				)
-				.then(response => {
-					this.results = response.data.results
-				})
-				.catch(error => {
-					console.log('tu je error')
-				})
+				this.results = response.data.results
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }

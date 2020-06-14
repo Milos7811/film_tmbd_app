@@ -1,46 +1,44 @@
 <template>
-	<!-- <div class="search"> -->
-	<ul class="list">
-		<a
-			tag="li"
-			:to="`/single`"
-			v-for="result in results"
-			:key="result.id"
-			@click="goToUrl(result.title, result.id)"
-		>
-			<v-card
-				class="mx-auto card"
-				max-width="150"
-				height="300"
-				v-on:mouseover="showHovered(result.id)"
-				v-on:mouseout="stopHovering"
+	<transition name="fade" mode="out-in">
+		<ul class="list">
+			<a
+				tag="li"
+				:to="`/single`"
+				v-for="result in results"
+				:key="result.id"
+				@click="goToUrl(result.title, result.id)"
 			>
-				<div class="content">
-					<img
-						class="image"
-						v-if="result.poster_path"
-						v-bind:src="
-							'http://image.tmdb.org/t/p/w500/' +
-								result.poster_path
-						"
-						width="150px"
-					/>
-					<img
-						class="image-holder"
-						v-else
-						src="../assets/empty_image.png"
-						alt=""
-					/>
-					<average-vote
-						class="vote-average"
-						:voteAverage="result.vote_average"
-					/>
-					<p class="fast-title">{{ shorten(result.title) }}</p>
-				</div>
-			</v-card>
-		</a>
-	</ul>
-	<!-- </div> -->
+				<v-card
+					class="mx-auto card"
+					max-width="150"
+					height="300"
+					v-on:mouseover="showHovered(result.id)"
+					v-on:mouseout="stopHovering"
+				>
+					<div class="content">
+						<img
+							class="image"
+							v-if="result.poster_path"
+							v-bind:src="
+								'http://image.tmdb.org/t/p/w500/' +
+									result.poster_path
+							"
+							width="150px"
+						/>
+						<div v-else class="empty-image">
+							<p class="text">Neobsahuje</p>
+							<p>obrázok</p>
+						</div>
+						<average-vote
+							class="vote-average"
+							:voteAverage="result.vote_average"
+						/>
+						<p class="fast-title">{{ shorten(result.title) }}</p>
+					</div>
+				</v-card>
+			</a>
+		</ul>
+	</transition>
 </template>
 
 <script>
@@ -55,12 +53,22 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+
 .image {
 	height: em(225);
 }
-.image-holder {
+.empty-image {
 	width: em(150);
 	height: em(225);
+	background-color: $navbar;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	align-items: center;
+	p {
+		display: flex;
+	}
 }
 .search {
 	display: block;
@@ -72,7 +80,7 @@ ul {
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: flex-start;
-	align-content: space-between;
+	align-content: center;
 	a {
 		margin-top: em(15);
 		margin-right: em(15);
@@ -89,5 +97,19 @@ ul {
 .fast-title {
 	// clear: both;
 	@include clearfix;
+}
+.fade-enter-active,
+.fade-leave-active {
+	transition: all 0.2s ease;
+}
+
+.fade-enter {
+	transform: translateX(10%);
+	opacity: 0;
+}
+
+.fade-leave-to {
+	transform: translateX(-10%);
+	opacity: 0;
 }
 </style>

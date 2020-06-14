@@ -42,15 +42,16 @@ export default {
 		search: debounce(function() {
 			this.getResult()
 		}, 500),
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/search/person?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&query=${this.query}&page=${this.page}&include_adult=false`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/search/person?api_key=${this.$apiKey}&language=en-US&query=${this.query}&page=${this.page}&include_adult=false`
 				)
-				.then(response => {
-					this.results = response.data.results
-					this.pageLength = response.data.total_pages
-				})
+				this.results = response.data.results
+				this.pageLength = response.data.total_pages
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }

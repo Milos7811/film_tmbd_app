@@ -50,7 +50,6 @@ export default {
 			this.getResult()
 		},
 		selectYear() {
-			console.log(this.selectYear)
 			this.getResult()
 		}
 	},
@@ -65,21 +64,24 @@ export default {
 		this.getResult()
 	},
 	methods: {
-		getResult() {
+		async getResult() {
 			let resultsArray = []
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/discover/tv?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&sort_by=${this.sortBy}&first_air_date_year=${this.selectYear}&page=${this.page}&with_genres=${this.genresId}&include_null_first_air_dates=false`
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/discover/tv?api_key=${this.$apiKey}&language=en-US&sort_by=${this.sortBy}&first_air_date_year=${this.selectYear}&page=${this.page}&with_genres=${this.genresId}&include_null_first_air_dates=false`
 				)
-				.then(response => {
-					response.data.results.forEach(element => {
-						if (element.overview) {
-							resultsArray.push(element)
-						}
-					})
-					this.pageLength = response.data.total_pages
+
+				response.data.results.forEach(element => {
+					if (element.overview) {
+						resultsArray.push(element)
+					}
 				})
-				.then((this.results = resultsArray))
+				this.pageLength = response.data.total_pages
+
+				this.results = resultsArray
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	},
 	computed: {

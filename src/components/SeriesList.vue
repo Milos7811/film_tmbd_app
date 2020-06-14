@@ -24,12 +24,10 @@
 						"
 						width="150px"
 					/>
-					<img
-						class="image-holder"
-						v-else
-						src="../assets/empty_image.png"
-						alt=""
-					/>
+					<div v-else class="empty-image">
+						<p class="text">Neobsahuje</p>
+						<p>obrázok</p>
+					</div>
 					<average-vote
 						class="vote-average"
 						:voteAverage="result.vote_average"
@@ -55,6 +53,19 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+.empty-image {
+	width: em(150);
+	height: em(225);
+	background-color: $navbar;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	align-items: center;
+	p {
+		display: flex;
+	}
+}
 .image {
 	height: em(225);
 }

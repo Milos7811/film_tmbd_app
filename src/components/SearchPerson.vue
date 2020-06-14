@@ -22,14 +22,15 @@ export default {
 		search: debounce(function() {
 			this.getResult()
 		}, 500),
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/search/person?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&query=${this.peopleId}&page=1&include_adult=false`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/search/person?api_key=${this.$apiKey}&language=en-US&query=${this.peopleId}&page=1&include_adult=false`
 				)
-				.then(response => {
-					this.results = response.data.results
-				})
+				this.results = response.data.results
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }

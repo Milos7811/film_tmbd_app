@@ -95,11 +95,6 @@ export default {
 				this.resetResults()
 			}
 		}
-		// $route(to, from) {
-		// 	console.log('zmena routera')
-
-		// 	this.resetResults()
-		// }
 	},
 	methods: {
 		resetResults() {
@@ -111,10 +106,10 @@ export default {
 				this.language = 'sk'
 			}, 500)
 		},
-		getResult() {
-			this.$axios
+		async getResult() {
+			const response = await this.$axios
 				.get(
-					`https://api.themoviedb.org/3/movie/${this.hoveredElementId}?api_key=810893a24970b82571f7a24c2decfab4&language=${this.language}&append_to_response=videos`
+					`https://api.themoviedb.org/3/movie/${this.hoveredElementId}?api_key=${this.$apiKey}&language=${this.language}&append_to_response=videos`
 				)
 
 				.then(response => {

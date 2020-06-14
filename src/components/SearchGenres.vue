@@ -31,16 +31,17 @@ export default {
 		}
 	},
 	methods: {
-		getGenres() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/genre/movie/list?api_key=810893a24970b82571f7a24c2decfab4&language=sk-SK`
+		async getGenres() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/genre/movie/list?api_key=${this.$apiKey}&language=sk-SK`
 				)
-				.then(response => {
-					response.data.genres.forEach(element => {
-						this.genres.push(element)
-					})
+				response.data.genres.forEach(element => {
+					this.genres.push(element)
 				})
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }

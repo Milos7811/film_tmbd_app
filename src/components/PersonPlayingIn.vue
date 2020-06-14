@@ -1,5 +1,5 @@
 <template>
-	<div class="person-laying">
+	<div class="person-playing">
 		<h1 class="main-title">Hral/-a</h1>
 		<div class="wrapper">
 			<ul>
@@ -52,12 +52,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
-.person-laying {
+.person-playing {
 	margin-top: em(30);
 }
 .main-title {
-	text-align: left;
+	text-align: center;
 	font-size: em(20);
+	margin-bottom: em(23);
 }
 .wrapper {
 	margin: em(10);

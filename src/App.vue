@@ -3,14 +3,16 @@
 		<navigation class="navigation" />
 		<v-container>
 			<transition name="fade" mode="out-in">
-				<router-view class="router-view" />
+				<router-view class="router-view container" />
 			</transition>
 			<fast-movie-preview />
 		</v-container>
+		<footer-component />
 	</v-app>
 </template>
 
 <script>
+import FooterComponent from './components/FooterComponent'
 import Navigation from './components/Navigation'
 import FastMoviePreview from './components/FastMoviePreview'
 
@@ -21,7 +23,8 @@ export default {
 	},
 	components: {
 		Navigation,
-		FastMoviePreview
+		FastMoviePreview,
+		FooterComponent
 	}
 }
 </script>
@@ -38,7 +41,7 @@ export default {
 
 #app {
 	width: 100%;
-	height: 100%;
+	// height: 100%;
 	font-family: 'Open Sans', sans-serif;
 
 	// font-family: Avenir, Helvetica, Arial, sans-serif;

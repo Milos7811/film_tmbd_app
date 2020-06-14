@@ -1,4 +1,4 @@
-<template >
+<template>
 	<div v-if="this.results.cast" min-height="200">
 		<h1 class="title">Hlavne obsadenie</h1>
 		<v-lazy
@@ -33,18 +33,19 @@ export default {
 		}
 	},
 	methods: {
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/${this.type}/${this.movieId}/credits?api_key=810893a24970b82571f7a24c2decfab4`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/${this.type}/${this.movieId}/credits?api_key=${this.$apiKey}`
 				)
-				.then(response => {
-					this.results = response.data
-				})
+
+				this.results = response.data
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

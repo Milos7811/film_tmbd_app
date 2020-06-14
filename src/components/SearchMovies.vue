@@ -72,15 +72,16 @@ export default {
 		search: debounce(function() {
 			this.getResult()
 		}, 500),
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/discover/movie?api_key=810893a24970b82571f7a24c2decfab4&language=sk-SK&sort_by=${this.sortBy}&include_adult=false&include_video=false&page=1&primary_release_year=${this.selectYear}&with_genres=${this.genresId}&page=${this.page}`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/discover/movie?api_key=${this.$apiKey}&language=sk-SK&sort_by=${this.sortBy}&include_adult=false&include_video=false&page=1&primary_release_year=${this.selectYear}&with_genres=${this.genresId}&page=${this.page}`
 				)
-				.then(response => {
-					this.results = response.data.results
-					this.pageLength = response.data.total_pages
-				})
+				this.results = response.data.results
+				this.pageLength = response.data.total_pages
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	},
 	computed: {

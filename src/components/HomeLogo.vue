@@ -54,14 +54,18 @@ export default {
 	},
 	methods: {
 		async getResult() {
-			await this.$axios
-				.get(
-					`https://api.themoviedb.org/3/trending/movie/week?api_key=810893a24970b82571f7a24c2decfab4`
-				)
-				.then(response => {
-					this.image = response.data.results[0].backdrop_path
-					this.result = response.data
-				})
+			try {
+				const response = await this.$axios
+					.get(
+						`https://api.themoviedb.org/3/trending/movie/week?api_key=${this.$apiKey}`
+					)
+					.then(response => {
+						this.image = response.data.results[0].backdrop_path
+						this.result = response.data
+					})
+			} catch (error) {
+				console.log(error)
+			}
 		},
 		toogleSearch() {
 			this.showSearch = !this.showSearch

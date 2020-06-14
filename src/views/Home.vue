@@ -14,17 +14,13 @@
 <script>
 import FastSearch from '../components/FastSearch.vue'
 import Popular from '../components/Popular.vue'
-// import NowPlaying from '../components/NowPlaying'
 import TopRated from '../components/TopRated'
 import MovieUpcoming from '../components/MovieUpcoming'
 import HomeLogo from '../components/HomeLogo'
-// import FastMoviePrwview from "../components/FastMoviePreview.vue";
-
 export default {
 	components: {
 		FastSearch,
 		Popular,
-		// NowPlaying,
 		TopRated,
 		MovieUpcoming,
 		HomeLogo
@@ -42,7 +38,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// [v-cloak] {
-//   display: none;
-// }
+[v-cloak] {
+	display: none;
+}
 </style>

@@ -7,6 +7,9 @@ import Popular from '../components/Popular.vue'
 import MovieShow from '../views/MovieShow.vue'
 import PersonShow from '../views/Person'
 import SeriesShow from '../views/SeriesShow.vue'
+import SearchMovies from '../components/SearchMovies.vue'
+import SearchPeople from '../components/SearchPeople.vue'
+import SearchSeries from '../components/SearchSeries.vue'
 
 Vue.use(VueRouter)
 
@@ -19,17 +22,32 @@ const routes = [
 	{
 		path: '/about',
 		name: 'About',
-		// route level code-splitting
-		// this generates a separate chunk (about.[hash].js) for this route
-		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '../views/About.vue')
 	},
 	{
-		path: '/search/',
+		path: '/search',
 		name: 'Search',
 		component: () =>
 			import(/* webpackChunkName: "search" */ '../views/Search.vue')
+		// component: Search,
+		// children: [
+		// 	{
+		// 		path: 'movies',
+		// 		name: 'Movies',
+		// 		component: SearchMovies
+		// 	},
+		// 	{
+		// 		path: 'people',
+		// 		name: 'People',
+		// 		component: SearchPeople
+		// 	},
+		// 	{
+		// 		path: 'seasons',
+		// 		name: 'Seasons',
+		// 		component: SearchSeries
+		// 	}
+		// ]
 	},
 	{
 		path: '/person/*',
@@ -49,6 +67,12 @@ const routes = [
 		component: SeriesShow,
 		props: true
 	}
+	// {
+	// 	path: '/search/movies',
+	// 	name: 'SearchMovies',
+	// 	component: SearchMovies,
+	// 	props: true
+	// }
 ]
 
 const router = new VueRouter({

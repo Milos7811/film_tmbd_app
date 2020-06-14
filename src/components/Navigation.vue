@@ -2,9 +2,28 @@
 	<nav id="nav" class="navigation">
 		<div class="container">
 			<div class="links">
-				<router-link to="/">Home</router-link>
+				<router-link to="/"> Home</router-link>
 				<router-link to="/about">About</router-link>
-				<router-link to="/search">Search</router-link>
+				<router-link to="/search">
+					<v-menu :open-on-hover="openOnHover" :offset-y="true">
+						<template v-slot:activator="{ on, attrs }">
+							<v-btn v-bind="attrs" v-on="on">
+								Vyhladavanie
+							</v-btn>
+						</template>
+						<v-list>
+							<router-link to="/search/movies">
+								<v-list-item>Filmy</v-list-item>
+							</router-link>
+							<router-link to="/search/people">
+								<v-list-item>Herci</v-list-item>
+							</router-link>
+							<router-link to="/search/seasons">
+								<v-list-item>Serialy</v-list-item>
+							</router-link>
+						</v-list>
+					</v-menu>
+				</router-link>
 			</div>
 		</div>
 	</nav>
@@ -17,7 +36,8 @@ export default {
 		return {
 			query: '',
 			showSearch: false,
-			iconMagnify: mdiMagnify
+			iconMagnify: mdiMagnify,
+			openOnHover: true
 		}
 	},
 	watch: {
@@ -35,6 +55,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+.list {
+	width: em(125);
+	float: right;
+	list-style: none;
+	background-color: $navbar;
+}
 
 nav {
 	background-color: $navbar;
@@ -58,14 +84,15 @@ nav {
 	margin-top: em(10, 20);
 	float: left;
 	margin: auto;
+	color: $primary-text;
+	background: transparent;
 }
 .search-bar {
 	width: 35%;
 	margin-bottom: em(20);
 	float: right;
-	// opacity: 1;
+
 	.search-input {
-		// transform: scaleX(0);
 		width: 90%;
 		background-color: white;
 		border-radius: em(20);
@@ -73,29 +100,14 @@ nav {
 		padding: em(8);
 		color: black;
 		transition: all 0.5 ease-in;
-		// display: inline-block;
-		// position: relative;
 	}
 	.magnify-icon {
 		font-size: em(35);
 		float: right;
-		// display: inline-block;
-		// float: right;
-		// position: relative;
 		color: white;
 		cursor: pointer;
 	}
-	// .fade-active .fade-leave-active {
-	// 	transition: all 1s ease-in;
-	// }
-	// .fade-enter,
-	// .fade-leave-to {
-	// 	opacity: 0;
-	// }
-	// .fade-enter-to,
-	// .fade-leave {
-	// 	opacity: 1;
-	// }
+
 	.fade-enter-active {
 		transition: all 0.3s ease-in;
 	}

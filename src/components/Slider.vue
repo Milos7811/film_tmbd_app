@@ -28,7 +28,7 @@
 							v-if="result.poster_path"
 							v-show="!skeleton"
 							dark
-							class="ma-3"
+							class="ma-3 card"
 							height="150"
 							width="100"
 							v-on:mouseover="showHovered(result.id)"
@@ -91,6 +91,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+// .card {
+// 	margin: em(3);
+// }
 .sheet {
 	display: flex;
 }
@@ -115,4 +118,12 @@ v-item-group {
 .theme--dark.v-sheet {
 	background-color: $primary;
 }
+
+// @media (max-width: 600px) {
+// 	.card {
+// 		width: 70px !important;
+// 		height: 100px !important;
+// 		margin: 3px !important;
+// 	}
+// }
 </style>

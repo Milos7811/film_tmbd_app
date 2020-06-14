@@ -52,7 +52,6 @@ export default {
 
 .character-name {
 	font-size: em(14);
-	// white-space: nowrap;
 }
 .image {
 	max-width: 150px;

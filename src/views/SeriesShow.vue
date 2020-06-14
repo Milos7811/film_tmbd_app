@@ -7,6 +7,7 @@
 <script>
 import SingleSeriesShow from '../components/SingleSeriesShow'
 export default {
+	name: 'SeriesShow',
 	components: { SingleSeriesShow },
 	data() {
 		return {
@@ -18,33 +19,47 @@ export default {
 		this.getResult()
 	},
 	methods: {
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/tv/${this.$route.query.id}?api_key=810893a24970b82571f7a24c2decfab4&language=${this.language}&append_to_response=videos`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/tv/${this.$route.query.id}?api_key=${this.$apiKey}&language=${this.language}`
 				)
-				.then(response => {
-					// console.log(response.data.seasons[0].overview)
-					if (!response.data.overview) {
-						this.language = 'en-US'
-						this.getResult()
-					} else if (
-						response.data.overview &&
-						!response.data.seasons[0].overview &&
-						this.language == 'sk-SK'
-					) {
-						this.result = response.data
-						this.language = 'en-US'
+				if (!this.result) {
+					this.overviewFilter(response.data)
+				} else {
+					this.seasonsFilter(response.data.seasons)
+				}
+			} catch (error) {
+				console.log(error)
+			}
+		},
+		overviewFilter(response) {
+			if (!response.overview) {
+				this.language = 'en-US'
+				this.getResult()
+			} else {
+				this.result = response
+				this.language = 'sk-SK'
+				this.getResult()
+			}
+		},
+		seasonsFilter(response) {
+			let items = []
 
-						this.getResult()
-					} else {
-						this.result.seasons = response.data.seasons
-					}
-				})
+			response.forEach(item => {
+				if (!item.overview && this.language == 'sk-SK') {
+					items.push(item)
+					this.language = 'en-US'
+					this.getResult()
+				} else {
+					items.push(item)
+				}
+			})
+			this.result.seasons = items
+			// console.log(this.result.seasons)
 		}
 	}
 }
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>

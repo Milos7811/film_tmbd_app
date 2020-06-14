@@ -22,7 +22,7 @@
 		</div>
 
 		<div class="wrapper-search">
-			<transition name="fade " mode="out-in">
+			<transition name="fade" mode="out-in">
 				<search-movies id="movies" v-if="this.movies" />
 				<search-people id="people" v-if="this.people" />
 				<search-series id="series" v-if="this.series" />
@@ -74,19 +74,18 @@ export default {
 	border-radius: em(20);
 	outline: none;
 }
-
-.fade-enter {
-	transform: translateX(10px);
-	opacity: 0;
-}
-
 .fade-enter-active,
 .fade-leave-active {
 	transition: all 0.2s ease;
 }
 
+.fade-enter {
+	transform: translateX(10%);
+	opacity: 0;
+}
+
 .fade-leave-to {
-	transform: translateX(-10px);
+	transform: translateX(-10%);
 	opacity: 0;
 }
 </style>

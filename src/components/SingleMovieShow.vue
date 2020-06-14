@@ -2,13 +2,48 @@
 	<transition name="rerender" mode="out-in">
 		<div v-cloak class="content">
 			<h2 class="title-name">{{ this.result.title }}</h2>
-			<!-- <div class="image" v-if="this.result.poster_path"> -->
-			<img
-				v-if="!this.fulllVideoPath && this.result.poster_path"
-				class="image"
-				v-bind:src="this.fullImagePath"
-			/>
-			<!-- </div>  -->
+			<main class="main">
+				<div class="image-wrapper">
+					<img
+						v-if="this.result.poster_path"
+						class="image"
+						v-bind:src="this.fullImagePath"
+					/>
+					<div v-else class="image empty-image ">
+						<p class="text">Neobsahuje</p>
+						<p>obrázok</p>
+					</div>
+				</div>
+				<article class="overview">
+					<h1 class="overview-title">Obsah</h1>
+					<p class="overview-text">{{ result.overview }}</p>
+				</article>
+
+				<div class="average">
+					<h1 class="average-text">
+						<p>Užívateľské</p>
+						<p>hodnotenie</p>
+					</h1>
+					<average-vote
+						class="series-vote-average"
+						:voteAverage="this.result.vote_average"
+					/>
+					<article class="genres-release-date">
+						<strong>Žáner:</strong>
+						<p
+							class="one-genre"
+							v-for="genre in this.result.genres"
+							:key="genre.id"
+						>
+							{{ genre.name }} <span class="genre-line">,</span>
+						</p>
+					</article>
+					<p class="release-date">
+						<strong> Dátum vydania: </strong
+						>{{ this.result.release_date }}
+					</p>
+				</div>
+			</main>
 			<div class="video-wraper" v-if="this.fulllVideoPath">
 				<iframe
 					class="video-player"
@@ -16,41 +51,8 @@
 					:src="this.fulllVideoPath"
 				></iframe>
 			</div>
-			<article class="genres">
-				<div class="about">
-					<p class="about-date" v-if="this.result.release_date">
-						{{ releaseData }}
-						<span class="dot">•</span>
-					</p>
 
-					<p class="about-time" v-if="this.result.runtime">
-						{{ result.runtime }} min
-						<span class="dot">•</span>
-					</p>
-
-					<p v-for="(genre, i) in result.genres" :key="i">
-						{{ genre.name }} |
-					</p>
-				</div>
-				<p class="vote-average-wrap">
-					Hodnotenie:
-					<average-vote
-						v-show="result.id"
-						class="vote-average-vote"
-						:voteAverage="result.vote_average"
-					/>
-				</p>
-			</article>
-			<main class="overview-image">
-				<img
-					v-if="this.fulllVideoPath"
-					class="side-image"
-					v-bind:src="this.fullImagePath"
-				/>
-				<p class="overview">{{ result.overview }}</p>
-			</main>
-
-			<movie-crew class="movie-crew" :movieId="result.id" type="movie" />
+			<movie-crew class="crew" :movieId="result.id" type="movie" />
 
 			<movie-similar type="movie" :movieId="result.id" />
 		</div>
@@ -100,30 +102,30 @@ export default {
 			Object.assign(this.$data, this.$options.data())
 			this.getResult()
 		},
-		getResult() {
-			this.$axios
-				.get(
-					`https://api.themoviedb.org/3/movie/${this.$route.query.id}?api_key=810893a24970b82571f7a24c2decfab4&language=${this.language}&append_to_response=videos`
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/movie/${this.$route.query.id}?api_key=${this.$apiKey}&language=${this.language}&append_to_response=videos`
 				)
-
-				.then(response => {
-					if (!response.data.overview) {
-						this.language = 'en'
-						this.getResult()
-					} else if (
-						response.data.videos.results[0] &&
-						!this.fulllVideoPath
-					) {
-						this.getVideo(response.data.videos.results[0].key)
-						this.getResult()
-					} else {
-						this.result = response.data
-						this.getImage()
-					}
-				})
-				.catch(error => {
-					console.log('error v Axios', error)
-				})
+				if (!response.data.overview) {
+					this.language = 'en'
+					this.getResult()
+				} else if (
+					response.data.videos.results[0] &&
+					!this.fulllVideoPath
+				) {
+					this.getVideo(response.data.videos.results[0].key)
+					this.getResult()
+				} else {
+					this.result = response.data
+					this.getImage()
+				}
+			} catch (error) {
+				console.log(error)
+			}
+		},
+		genreLine(index) {
+			return this.data
 		}
 	}
 }
@@ -132,88 +134,109 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/app.scss';
 
-.movie-crew {
-	margin-top: em(40);
-}
-
-main {
-	margin-top: em(40);
-	display: inline-flex;
-	width: 100%;
-	height: auto;
-	.side-image {
-		position: relative;
-	}
-	.overview {
-		// @include clearfix;
-		width: 50%;
-		margin: auto;
-		margin-top: em(0);
-		line-height: em(30);
+.empty-image {
+	width: em(300);
+	height: em(450);
+	background-color: $primary;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: em(300);
+	float: left;
+	margin: em(0) em(15) em(0) em(0);
+	box-shadow: 0px 8px 8px -3px rgba(0, 0, 0, 0.6),
+		0px 10px 16px 1px rgba(0, 0, 0, 0.18),
+		0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
+	p {
+		display: flex;
 	}
 }
-
+.main {
+	min-height: em(450);
+}
+.release-date {
+	margin: em(20) em(0);
+	text-align: left;
+}
 .title-name {
-	font-size: em(30) !important;
-	margin: em(30, 30) em(0);
+	font-size: em(30);
 }
-
-.genres {
-	margin-top: em(30);
-	.about {
-		display: inline-flex;
-		float: left;
-		.dot {
-			margin: 0 em(5);
+.image {
+	// max-width: em(300);
+	width: 100%;
+	max-width: 300px;
+	float: left;
+	margin: em(0) em(15) em(0) em(0);
+}
+.overview {
+	min-width: em(245);
+	margin: em(15);
+	text-align: left;
+	display: flow-root;
+	.overview-title {
+		font-size: em(20);
+		margin-bottom: em(10);
+	}
+}
+.average {
+	// height: em(50);
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin-top: em(40);
+	.average-text {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+		margin-left: em(80);
+		p {
+			margin-bottom: em(5);
 		}
 	}
-	.vote-average-wrap {
-		font-size: em(30);
-		float: right;
-		line-height: em(15);
-		margin-right: em(10);
-		.vote-average-vote {
-			display: inline-grid;
-			font-size: em(20, 30);
-			transform: scale(1.5);
+	.series-vote-average {
+		margin-top: em(10);
+		position: absolute;
+		transform: scale(1.5);
+		// clear: both;
+	}
+	.genres-release-date {
+		display: flex;
+		margin-top: em(35);
+		.one-genre {
+			margin-right: em(4);
+			height: 22px;
+			display: flex;
+			white-space: nowrap;
 		}
 	}
+}
+.crew {
+	clear: both;
 }
 .video-wraper {
-	max-width: 70%;
-	height: 58%;
-	margin: auto;
+	max-width: 960px;
+	max-height: 565px;
+	margin: em(50) auto;
+	position: relative;
+	overflow: hidden;
+	padding-top: 44.18%;
 	.video-player {
-		min-width: 100%;
-		min-height: 100%;
-		margin: auto;
-		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
 	}
-}
-.content {
-	width: 100%;
-	height: 100%;
-	display: block;
-}
-img {
-	width: 20%;
-}
-.side-image {
-	max-width: em(150);
-	max-height: em(220);
-}
-.rerender-enter {
-	transform: translateX(10px);
-	opacity: 0;
-}
-
-.rerender-enter-active,
-.rerender-leave-active {
-	transition: all 0.2s ease;
-}
-
-.rerender-leave-to {
-	transform: translateX(-10px);
-	opacity: 0;
+	// max-width: em(960);
+	// max-height: em(565);
+	// margin: em(50) auto;
+	// .video-player {
+	// 	min-width: 100%;
+	// 	min-height: 100%;
+	// 	margin: auto;
+	// 	display: block;
+	// }
 }
 </style>

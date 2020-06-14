@@ -51,14 +51,16 @@ export default {
 	},
 	methods: {
 		async getResult() {
-			await this.$axios
-				.get(
-					`https://api.themoviedb.org/3/trending/movie/${this.timeWindow}?api_key=810893a24970b82571f7a24c2decfab4`
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/trending/movie/${this.timeWindow}?api_key=${this.$apiKey}`
 				)
-				.then(response => {
-					this.results = response.data.results
-				})
+				this.results = response.data.results
+			} catch (error) {
+				console.log(error)
+			}
 		},
+
 		toogleDay() {
 			this.timeWindowDay = true
 			this.timeWindowWeek = false

@@ -25,8 +25,7 @@ export default {
 		getImage() {
 			try {
 				return (this.fullImagePath =
-					'http://image.tmdb.org/t/p/original/' +
-					this.result.poster_path)
+					'http://image.tmdb.org/t/p/w500/' + this.result.poster_path)
 			} catch (error) {
 				console.log(error)
 			}

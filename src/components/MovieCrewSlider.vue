@@ -58,18 +58,7 @@ import Mixins from '../mixins/Mixins'
 export default {
 	props: ['results'],
 	mixins: [Mixins],
-	methods: {
-		// goToUrlPerson(name, id) {
-		// 	let slug = _.trim(
-		// 		_.deburr(name.toLowerCase()) // diacrnpm uitics
-		// 			.replace(/[^\w\s]/gi, '') // special characters
-		// 			.replace(/ {2,}/g, ' ') // repeating spaces
-		// 			.replace(/ /g, '-'), // space to -
-		// 		'-' // trailing -
-		// 	)
-		// 	this.$router.push({ path: '/person/' + slug, query: { id } })
-		// }
-	}
+	methods: {}
 }
 </script>
 
@@ -85,7 +74,6 @@ export default {
 
 .character-name {
 	font-size: em(14);
-	// white-space: nowrap;
 }
 .image {
 	width: 100px;

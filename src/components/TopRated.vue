@@ -21,13 +21,14 @@ export default {
 	},
 	methods: {
 		async getResult() {
-			await this.$axios
-				.get(
-					`https://api.themoviedb.org/3/movie/top_rated?api_key=810893a24970b82571f7a24c2decfab4&page=1&region=sk`
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.$apiKey}&page=1&region=sk`
 				)
-				.then(response => {
-					this.results = response.data.results
-				})
+				this.results = response.data.results
+			} catch (error) {
+				console.log(error)
+			}
 		}
 	}
 }

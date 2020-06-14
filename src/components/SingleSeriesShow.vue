@@ -11,6 +11,10 @@
 			"
 			:alt="this.result.name"
 		/>
+		<div v-else class="image empty-image ">
+			<p class="text">Neobsahuje</p>
+			<p>obrázok</p>
+		</div>
 		<main>
 			<article class="overview">
 				<h1 class="overview-title">Obsah</h1>
@@ -25,7 +29,9 @@
 					class="series-vote-average"
 					:voteAverage="this.result.vote_average"
 				/>
+				<h1>{{ this.result.status }}</h1>
 				<article class="genres-release-date">
+					<strong>Žáner: </strong>
 					<p
 						class="one-genre"
 						v-for="genre in this.result.genres"
@@ -35,35 +41,44 @@
 					</p>
 					<!-- <p class="dot">•</p> -->
 				</article>
-				<p class="air-date">Dátum prvého vydania: {{ firstAirDate }}</p>
+				<p class="air-date">
+					<strong> Dátum prvého vydania:</strong> {{ firstAirDate }}
+				</p>
 				<p class="original-name">
-					Pôvodný názov: {{ this.result.original_name }}
+					<strong> Pôvodný názov:</strong>
+					{{ this.result.original_name }}
 				</p>
 			</div>
 		</main>
 		<movie-crew class="crew" :movieId="this.result.id" type="tv" />
-		<series-seasons-group :result="filterItems" />
+		<h1 class="title">Série</h1>
+		<div v-for="season in filterItems" :key="season.id">
+			<single-season :season="season.season_number" />
+		</div>
 	</div>
 </template>
 
 <script>
-import SeriesSeasonsGroup from '../components/SeriesSeasonsGroup'
+import SingleSeason from '../components/SingleSeason'
 import MovieCrew from '../components/MovieCrew'
 import moment from 'moment'
 import AverageVote from '../components/AverageVote'
 import Mixins from '../mixins/Mixins'
 export default {
-	components: { AverageVote, MovieCrew, SeriesSeasonsGroup },
+	components: { AverageVote, MovieCrew, SingleSeason },
 	mixins: [Mixins],
 	props: ['result'],
 	data() {
 		return {
-			filterItems: ''
+			filterItems: '',
+			showSeasons: true
 		}
 	},
 	watch: {
 		result(newValue, oldValue) {
-			this.filterSeasons()
+			setTimeout(() => {
+				this.filterSeasons()
+			}, 500)
 		}
 	},
 	computed: {
@@ -76,12 +91,9 @@ export default {
 			let filteredItem = []
 			this.result.seasons.forEach(item => {
 				if (item.season_number > 0) {
-					Object.assign(item, { show: false })
 					filteredItem.push(item)
-					// this.filterItems.push(item)
 				}
 			})
-			// return filteredItem
 			this.filterItems = filteredItem
 		}
 	}
@@ -90,6 +102,27 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
+.empty-image {
+	width: em(300);
+	height: em(450);
+	background-color: $primary;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: em(300);
+	float: left;
+	margin: em(0) em(15) em(0) em(0);
+	box-shadow: 0px 8px 8px -3px rgba(0, 0, 0, 0.6),
+		0px 10px 16px 1px rgba(0, 0, 0, 0.18),
+		0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
+	p {
+		display: flex;
+	}
+}
+.title {
+	margin: em(30);
+}
 .air-date {
 	margin: em(20) em(0);
 	text-align: left;

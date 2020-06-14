@@ -17,11 +17,7 @@
 <script>
 export default {
 	props: ['voteAverage'],
-	data() {
-		return {
-			// value: percentageValue()
-		}
-	},
+
 	computed: {
 		percentageValue() {
 			let value = this.voteAverage * 10
