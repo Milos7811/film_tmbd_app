@@ -1,10 +1,9 @@
 <template>
-	<div class="home container" v-cloak>
+	<div class="home container">
 		<home-logo />
-		<FastSearch v-if="this.searchQuery" />
-		<div class="sliders" v-if="!this.searchQuery">
+		<FastSearch v-show="this.searchQuery" />
+		<div class="sliders" v-show="!this.searchQuery">
 			<popular />
-			<!-- <now-playing /> -->
 			<top-rated />
 			<movie-upcoming />
 		</div>
@@ -37,8 +36,4 @@ export default {
 	}
 }
 </script>
-<style lang="scss" scoped>
-[v-cloak] {
-	display: none;
-}
-</style>
+<style lang="scss" scoped></style>

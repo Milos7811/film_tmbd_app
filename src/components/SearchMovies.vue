@@ -116,13 +116,26 @@ export default {
 	display: block;
 }
 .inputs-wrapper {
-	height: em(48);
+	// height: em(48);
 	display: flex;
 	& > * {
 		margin: em(0) em(10);
-		color: $primary;
-		padding: em(10);
-		box-sizing: border-box;
+	}
+	@media (max-width: 500px) {
+		& {
+			flex-direction: column;
+		}
+		& > * {
+			margin: em(0) em(10);
+			color: $primary;
+			padding: em(10);
+			box-sizing: border-box;
+			@media (max-width: 500px) {
+				& {
+					margin: em(10) auto;
+				}
+			}
+		}
 	}
 }
 .input {
@@ -131,5 +144,10 @@ export default {
 	background-color: white;
 	border-radius: em(20);
 	outline: none;
+}
+@media screen and (max-width: 500px) {
+	.pagination {
+		color: blue !important;
+	}
 }
 </style>

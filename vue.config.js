@@ -1,4 +1,3 @@
-process.env.VUE_APP_VERSION = require('./package.json').version
 module.exports = {
 	css: {
 		loaderOptions: {
@@ -10,5 +9,8 @@ module.exports = {
 			}
 		}
 	},
-	transpileDependencies: ['vuetify']
+	transpileDependencies: ['vuetify'],
+	devServer: {
+		proxy: 'http://localhost:8080'
+	}
 }

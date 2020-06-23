@@ -62,9 +62,12 @@ export default {
 	flex-wrap: wrap;
 	margin-bottom: em(40);
 	& > * {
-		margin: em(0) em(20);
+		margin-right: em(20);
 		font-size: em(20);
 		cursor: pointer;
+		&:last-child {
+			margin-right: 0px;
+		}
 	}
 }
 .input {

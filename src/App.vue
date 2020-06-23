@@ -1,9 +1,16 @@
 <template>
-	<v-app id="app" dark>
+	<v-app id="app" dark v-cloak>
 		<navigation class="navigation" />
 		<v-container>
+			<v-overlay z-index="10" opacity="1" v-show="loader">
+				<v-progress-circular
+					indeterminate
+					size="64"
+					color="rgb(155, 46, 46)"
+				></v-progress-circular>
+			</v-overlay>
 			<transition name="fade" mode="out-in">
-				<router-view class="router-view container" />
+				<router-view class="router-view " />
 			</transition>
 			<fast-movie-preview />
 		</v-container>
@@ -19,12 +26,20 @@ import FastMoviePreview from './components/FastMoviePreview'
 export default {
 	name: 'App',
 	data() {
-		return {}
+		return {
+			loader: true
+		}
 	},
 	components: {
 		Navigation,
 		FastMoviePreview,
 		FooterComponent
+	},
+
+	created() {
+		setTimeout(() => {
+			this.loader = false
+		}, 2000)
 	}
 }
 </script>
@@ -48,6 +63,12 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
+}
+[v-cloak] {
+	display: none;
+}
+[v-cloak]::before {
+	content: 'loading...';
 }
 .fade-enter {
 	transform: translateX(10px);

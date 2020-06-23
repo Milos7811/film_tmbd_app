@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2 class="title">Najlepšie hodnoteńe</h2>
+		<h2 v-if="this.results" class="title">Najlepšie hodnoteńe</h2>
 		<slider class="slider" :results="this.results" />
 	</div>
 </template>
@@ -16,7 +16,7 @@ export default {
 			results: ''
 		}
 	},
-	mounted() {
+	created() {
 		this.getResult()
 	},
 	methods: {

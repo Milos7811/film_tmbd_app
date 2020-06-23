@@ -1,23 +1,16 @@
 <template>
-	<div>
-		<v-menu :open-on-hover="openOnHover" :offset-y="true">
-			<template v-slot:activator="{ on, attrs }">
-				<v-btn v-bind="attrs" v-on="on">
-					Vyhladavanie
-				</v-btn>
-			</template>
-			<v-list>
-				<v-list-item>Filmy</v-list-item>
-				<v-list-item>Herci</v-list-item>
-				<v-list-item>Serialy</v-list-item>
-			</v-list>
-		</v-menu>
+	<div class="container">
+		<article>
+			<h1></h1>
+			<p>
+				Táto stránka bola vytvorená za účelom vytvorit svoj vlastný
+				projekt kďe budem môcť rozširovať svoje znalosti a skúsenosti oh
+			</p>
+		</article>
 	</div>
 </template>
 <script>
-// import AverageVote from '../components/AverageVote.vue'
 export default {
-	// components: { AverageVote },
 	data() {
 		return {
 			openOnHover: true

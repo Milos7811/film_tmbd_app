@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="inputs-wrapper">
-			<search-genres />
+			<search-genres class="select" />
 			<v-select
 				v-model="selectYear"
 				:items="yearsGenerator"
@@ -12,7 +12,7 @@
 				class="select"
 			>
 			</v-select>
-			<search-sort-by />
+			<search-sort-by class="select" />
 		</div>
 		<series-list :results="this.results" />
 		<v-pagination
@@ -109,15 +109,27 @@ export default {
 	padding: em(0) !important;
 }
 .inputs-wrapper {
-	height: em(48);
 	display: flex;
-	& > * {
+	.select {
 		margin: em(0) em(10);
-		color: $primary;
-		padding: em(10);
-		box-sizing: border-box;
+	}
+	@media (max-width: 500px) {
+		& {
+			// display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		.select {
+			margin: em(10) em(0);
+			// margin: em(0) em(10);
+			// color: $primary;
+			// padding: em(10);
+			// box-sizing: border-box;
+			// margin: em(10) auto;
+		}
 	}
 }
+
 .input {
 	width: em(150);
 	height: em(48);

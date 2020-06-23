@@ -4,16 +4,17 @@
 	font-size: 100%;
 }
 html {
-	width: 100%;
+	// width: 100%;
 	height: auto;
 	font-family: 'Open Sans', sans-serif;
 	scroll-behavior: smooth;
 }
 
 .container {
-	// height: 100%;
+	min-height: 95%;
 	max-width: 1400px;
-	margin: auto;
+	margin: em(0) auto;
+
 	// margin-top: em(60);
 }
 [v-cloak] {

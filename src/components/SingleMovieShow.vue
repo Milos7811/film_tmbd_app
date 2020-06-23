@@ -30,13 +30,15 @@
 					/>
 					<article class="genres-release-date">
 						<strong>Žáner:</strong>
-						<p
-							class="one-genre"
-							v-for="genre in this.result.genres"
-							:key="genre.id"
-						>
-							{{ genre.name }} <span class="genre-line">,</span>
-						</p>
+						<ul>
+							<li
+								class="one-genre"
+								v-for="genre in this.result.genres"
+								:key="genre.id"
+							>
+								{{ genre.name }}
+							</li>
+						</ul>
 					</article>
 					<p class="release-date">
 						<strong> Dátum vydania: </strong
@@ -207,7 +209,7 @@ export default {
 			margin-right: em(4);
 			height: 22px;
 			display: flex;
-			white-space: nowrap;
+			// white-space: nowrap;
 		}
 	}
 }

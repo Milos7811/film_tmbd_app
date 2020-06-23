@@ -28,6 +28,7 @@
 					</p>
 				</div>
 			</div>
+
 			<article class="content">
 				<h1 class="name">
 					<h1 class="episode-count" v-if="this.episodeNumber">
@@ -55,7 +56,7 @@ export default {
 			language: 'sk-SK'
 		}
 	},
-	created() {
+	mounted() {
 		this.getResult()
 	},
 	watch: {
@@ -70,12 +71,12 @@ export default {
 					`https://api.themoviedb.org/3/tv/${this.$route.query.id}/season/${this.season_number}/episode/${this.episode_number}?api_key=${this.$apiKey}&language=${this.language}`
 				)
 
-				if (!response.data.overview && this.language == 'sk-SK') {
-					this.language = 'en-US'
-					this.getResult()
-				} else {
-					this.result = response.data
-				}
+				// if (!response.data.overview && this.language == 'sk-SK') {
+				// 	this.language = 'en-US'
+				// 	this.getResult()
+				// } else {
+				this.result = response.data
+				// }
 			} catch (error) {
 				console.log(error)
 			}
@@ -97,6 +98,7 @@ export default {
 	background-color: $primary !important;
 	color: $primary-text;
 	padding: em(10);
+
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
 		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
 		0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
@@ -112,13 +114,30 @@ export default {
 }
 .top-content {
 	width: 100%;
-	min-width: em(360);
+	// min-width: em(360);
+	padding-bottom: em(10);
+	border-bottom: 1px solid darken(#f2f2f2, 30%);
 	display: flex;
 	justify-content: space-between;
-
+	@media (max-width: 800px) {
+		& {
+			flex-direction: column;
+			align-items: center;
+			margin-bottom: em(10);
+		}
+	}
 	.info-group {
 		display: flex;
 		align-items: center;
+		.average {
+			margin: em(0) em(20);
+		}
+		@media (max-width: 615px) {
+			flex-direction: column;
+			.average {
+				margin: em(5) em(0);
+			}
+		}
 	}
 	.image {
 		max-width: em(150);
@@ -154,9 +173,7 @@ export default {
 		margin-right: em(5);
 	}
 }
-.average {
-	margin: em(0) em(20);
-}
+
 .episode-enter-active,
 .episode-leave-active {
 	transition: all 0.5s ease;

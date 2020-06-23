@@ -7,6 +7,7 @@
 			class="input"
 			@keydown="search"
 		/>
+
 		<person-list :results="this.results" />
 		<v-pagination
 			class="pagination"
@@ -20,6 +21,7 @@
 </template>
 
 <script>
+import iso3311a2 from 'iso-3166-1-alpha-2'
 import { debounce } from 'lodash'
 import PersonList from '../components/PersonList'
 export default {
@@ -34,18 +36,42 @@ export default {
 	},
 	watch: {
 		page() {
-			this.getResult()
+			if (this.query) {
+				this.getResult()
+			} else if (!this.query) {
+				this.getPopular()
+			}
+		},
+		query() {
+			if (!this.query) {
+				this.getPopular()
+			}
 		}
 	},
-
+	created() {
+		this.getPopular()
+	},
 	methods: {
 		search: debounce(function() {
-			this.getResult()
+			if (this.query) {
+				this.getResult()
+			}
 		}, 500),
 		async getResult() {
 			try {
 				const response = await this.$axios.get(
 					`https://api.themoviedb.org/3/search/person?api_key=${this.$apiKey}&language=en-US&query=${this.query}&page=${this.page}&include_adult=false`
+				)
+				this.results = response.data.results
+				this.pageLength = response.data.total_pages
+			} catch (error) {
+				console.log(error)
+			}
+		},
+		async getPopular() {
+			try {
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/person/popular?api_key=${this.$apiKey}&language=en-US&page=${this.page}`
 				)
 				this.results = response.data.results
 				this.pageLength = response.data.total_pages

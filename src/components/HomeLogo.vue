@@ -1,18 +1,22 @@
 <template>
 	<div class="wraper">
 		<div class="image-wraper">
-			<!-- <div class="color-layer"></div> -->
+			<!-- <div class="color-layer"> -->
 			<v-skeleton-loader
-				v-if="!this.image"
+				v-if="this.skeleton"
 				class="mx-auto image-skeleton"
 				type="image"
+				transition="scale-transition"
+				height="450"
 			></v-skeleton-loader>
 			<img
+				v-show="this.image && !this.skeleton"
 				v-if="this.image"
 				class="image"
 				:src="`http://image.tmdb.org/t/p/original/${this.image} `"
 				alt=""
 			/>
+			<!-- </div> -->
 		</div>
 		<div class="search-bar">
 			<!-- <transition name="fade"> -->
@@ -20,13 +24,17 @@
 				class="search-input"
 				v-model="query"
 				type="text"
-				placeholder="Fast search"
+				placeholder="Filmy, Seriály, Herci "
 				@keydown.esc="query = ''"
 			/>
 			<!-- </transition> -->
-			<v-icon @click="toogleSearch" class="magnify-icon" right>{{
-				iconClose
-			}}</v-icon>
+			<v-icon
+				v-if="this.query"
+				@click="query = ''"
+				class="magnify-icon"
+				right
+				>{{ iconClose }}</v-icon
+			>
 		</div>
 	</div>
 </template>
@@ -40,12 +48,15 @@ export default {
 			image: '',
 			result: '',
 			query: '',
-			// showSearch: false,
-			iconClose: mdiClose
+			iconClose: mdiClose,
+			skeleton: true
 		}
 	},
 	mounted() {
 		this.getResult()
+		setTimeout(() => {
+			this.skeleton = false
+		}, 2000)
 	},
 	watch: {
 		query(value) {
@@ -61,6 +72,9 @@ export default {
 					)
 					.then(response => {
 						this.image = response.data.results[0].backdrop_path
+						if (!this.image) {
+							this.image = response.data.results[1].backdrop_path
+						}
 						this.result = response.data
 					})
 			} catch (error) {
@@ -77,41 +91,40 @@ export default {
 <style lang="scss" scoped>
 @import '../scss/app.scss';
 .wraper {
-	width: 90%;
-	height: em(350);
+	width: 100%;
+	height: 33%;
+	max-height: em(450);
 	margin: auto;
+	margin-top: em(-25);
 }
 .image-wraper {
 	overflow: hidden;
 	width: 100%;
-	height: 80%;
+	height: 100%;
+	max-height: em(450);
 	margin: auto;
-	.color-layer {
-		width: 70%;
-		position: relative;
-		height: 100%;
-		background-color: #3e2ea8;
-		z-index: 10;
-		opacity: 0;
-		margin: auto;
-	}
+
 	.image {
-		width: 70%;
+		width: 100%;
 		margin: auto;
 		position: relative;
 	}
 	.image-skeleton {
-		width: 70%;
-		height: em(300) !important;
+		width: 100% !important;
+		height: 100% !important;
+		// height: em(450) !important;
 	}
+}
+.v-skeleton-loader__image {
+	height: 450px !important;
 }
 .search-bar {
 	max-width: 45%;
 	min-width: em(260);
-	// margin-bottom: em(20);
 	margin: em(10) auto;
-	// float: right;
-	// opacity: 1;
+	margin-top: -50px;
+	z-index: 5;
+	position: relative;
 	.search-input {
 		// transform: scaleX(0);
 		width: 80%;
@@ -125,7 +138,6 @@ export default {
 	.magnify-icon {
 		font-size: em(35);
 		float: right;
-		width: 10%;
 		margin: em(5);
 
 		color: white;

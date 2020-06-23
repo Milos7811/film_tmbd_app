@@ -12,11 +12,17 @@
 				{{ this.result.known_for_department }}
 			</p>
 			<!-- <p v-if="dataBirthday" class="person-information-text"></p> -->
-			<h3 v-if="dataBirthday" class="person-information-title">
+			<h3 v-if="this.result.birthday" class="person-information-title">
 				Dátum narodenia
 			</h3>
-			<p v-if="dataBirthday" class="person-information-text">
+			<p v-if="this.result.birthday" class="person-information-text">
 				{{ dataBirthday }}
+			</p>
+			<h3 v-if="this.result.birthday" class="person-information-title">
+				Vek
+			</h3>
+			<p v-if="this.result.birthday" class="person-information-text">
+				{{ this.personOld(this.result.birthday) }}
 			</p>
 			<h3 v-if="this.result.deathday" class="person-information-title">
 				Dátum úmrtia
@@ -24,6 +30,7 @@
 			<p v-if="this.result.deathday" class="person-information-text">
 				{{ dateDeath }}
 			</p>
+
 			<h3
 				v-if="this.result.place_of_birth"
 				class="person-information-title"
@@ -43,6 +50,7 @@
 			>
 				Tiež známy/-a ako
 			</h3>
+
 			<p
 				v-for="(know, i) in this.result.also_known_as"
 				:key="i"
@@ -58,12 +66,20 @@
 import moment from 'moment'
 export default {
 	props: ['result'],
+
 	computed: {
 		dataBirthday() {
 			return moment(this.result.birthday).format('DD MMM YYYY')
 		},
 		dateDeath() {
 			return moment(this.result.deathday).format('DD MMM YYYY')
+		}
+	},
+	methods: {
+		personOld(born) {
+			let d = new Date().getFullYear()
+			let n = new Date(born).getFullYear()
+			return d - n
 		}
 	}
 }

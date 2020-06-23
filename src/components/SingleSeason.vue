@@ -7,17 +7,17 @@
 		min-height="200"
 		transition="slide-x-transition"
 	>
-		<div class="season-wrapper">
-			<ul class="season-list" v-if="this.result">
-				<li
-					:class="{ colaps: this.activeSeason }"
-					class="full-wrapper"
-					@click="activeSeason = !activeSeason"
-				>
-					<div class="season-item">
+		<div class="season-wrapper" v-if="this.result">
+			<main
+				:class="{ colaps: this.activeSeason }"
+				class="full-wrapper"
+				@click="activeSeason = !activeSeason"
+			>
+				<div class="season-item">
+					<div class="wrapper-image-series">
 						<h1 class="item-title">{{ this.result.name }}</h1>
 						<v-skeleton-loader
-							v-show="skeleton"
+							v-if="skeleton"
 							ref="skeleton"
 							type="image"
 							class="my-auto"
@@ -32,29 +32,28 @@
 							"
 							alt=""
 						/>
-						<article class="article">
-							<p class="overview">{{ this.result.overview }}</p>
-							<p class="episode-count">
-								Počet epizód: {{ this.result.episodes.length }}
-							</p>
-							<p>
-								Dátum prvého vydania:
-								{{ firstAirDate(this.result.air_date) }}
-							</p>
-							<p>{{ this.result.show }}</p>
-						</article>
 					</div>
-					<div class="container">
-						<transition name="episode" mode="in-out">
-							<series-episode
-								v-show="activeSeason"
-								class="series-episopde"
-								:season="this.result.season_number"
-							/>
-						</transition>
-					</div>
-				</li>
-			</ul>
+					<article class="article">
+						<p class="overview">{{ this.result.overview }}</p>
+						<p class="episode-count">
+							Počet epizód: {{ this.result.episodes.length }}
+						</p>
+						<p>
+							Dátum prvého vydania:
+							{{ firstAirDate(this.result.air_date) }}
+						</p>
+					</article>
+				</div>
+				<div class="container">
+					<transition name="episode" mode="in-out">
+						<series-episode
+							v-show="activeSeason"
+							class="series-episopde"
+							:season="this.result.season_number"
+						/>
+					</transition>
+				</div>
+			</main>
 		</div>
 	</v-lazy>
 </template>
@@ -77,12 +76,8 @@ export default {
 			skeleton: true
 		}
 	},
-	watch: {
-		isActive(newValue, oldValue) {
-			console.log(this.isActive)
-		}
-	},
-	mounted() {
+
+	created() {
 		this.getResult()
 	},
 
@@ -99,20 +94,15 @@ export default {
 		},
 		async getResult() {
 			try {
-				const response = await this.$axios
-					.get(
-						`https://api.themoviedb.org/3/tv/${this.$route.query.id}/season/${this.season}?api_key=${this.$apiKey}&language=${this.language}`
-					)
-					.then(response => {
-						if (
-							!response.data.overview &&
-							this.language == 'sk-SK'
-						) {
-							this.language = 'en-US'
-							this.getResult()
-						}
-						this.result = response.data
-					})
+				const response = await this.$axios.get(
+					`https://api.themoviedb.org/3/tv/${this.$route.query.id}/season/${this.season}?api_key=${this.$apiKey}&language=${this.language}`
+				)
+				if (!response.data.overview && this.language == 'sk-SK') {
+					this.language = 'en-US'
+					this.getResult()
+				}
+				this.result = response.data
+				this.skeleton = false
 			} catch (error) {
 				console.log(error)
 			}
@@ -130,8 +120,11 @@ export default {
 	overflow: hidden;
 	max-height: 10000px;
 }
+.wrapper-image-series {
+	display: flex;
+}
 .full-wrapper {
-	max-height: 300px;
+	// max-height: 300px;
 	transition: all 0.9s linear;
 	border: 1px solid $navbar;
 	border-radius: em(10);
@@ -139,7 +132,8 @@ export default {
 	padding: em(5);
 	cursor: pointer;
 
-	&:hover {
+	&:hover,
+	:focus {
 		border: 1px solid darken($navbar, 20%);
 	}
 }
@@ -155,13 +149,13 @@ export default {
 .season-wrapper {
 	margin: em(30) em(0);
 }
-.season-list {
-	list-style: none;
-}
+
 .season-item {
-	height: em(240);
+	// height: em(240);
 	display: flex;
-	// border: 1px solid $primary-text;
+	@media (max-width: 600px) {
+		flex-direction: column;
+	}
 
 	.item-title {
 		display: flex;

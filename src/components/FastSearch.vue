@@ -94,7 +94,9 @@ export default {
 	},
 	watch: {
 		query(value) {
-			this.search()
+			if (value) {
+				this.search()
+			}
 		},
 		page() {
 			this.getResult()
@@ -110,21 +112,16 @@ export default {
 					`https://api.themoviedb.org/3/search/multi?api_key=810893a24970b82571f7a24c2decfab4&language=en-US&query=${this.query}&page=${this.page}&include_adult=false`
 				)
 				.then(response => {
-					console.log(response)
 					this.results = response.data.results
 					this.pageLength = response.data.total_pages
-					console.log(this.results)
 				})
 		},
 		goUrl(result) {
 			if (result.media_type == 'movie') {
-				console.log('movie')
 				this.goToUrl(result.title, result.id)
 			} else if (result.media_type == 'tv') {
-				console.log('tv')
 				this.goToUrlSeries(result.name, result.id)
 			} else if (result.media_type == 'person') {
-				console.log('tv')
 				this.goToUrlPerson(result.name, result.id)
 			}
 		}

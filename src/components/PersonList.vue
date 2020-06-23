@@ -39,12 +39,14 @@ export default {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: flex-start;
-	align-content: space-around;
+	align-content: center;
 }
 .card {
 	overflow: hidden;
+	background-color: $navbar !important;
+	color: $primary-text !important;
 }
 .real-name {
 	font-size: em(15);

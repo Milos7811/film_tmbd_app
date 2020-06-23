@@ -2,28 +2,9 @@
 	<nav id="nav" class="navigation">
 		<div class="container">
 			<div class="links">
-				<router-link to="/"> Home</router-link>
-				<router-link to="/about">About</router-link>
-				<router-link to="/search">
-					<v-menu :open-on-hover="openOnHover" :offset-y="true">
-						<template v-slot:activator="{ on, attrs }">
-							<v-btn v-bind="attrs" v-on="on">
-								Vyhladavanie
-							</v-btn>
-						</template>
-						<v-list>
-							<router-link to="/search/movies">
-								<v-list-item>Filmy</v-list-item>
-							</router-link>
-							<router-link to="/search/people">
-								<v-list-item>Herci</v-list-item>
-							</router-link>
-							<router-link to="/search/seasons">
-								<v-list-item>Serialy</v-list-item>
-							</router-link>
-						</v-list>
-					</v-menu>
-				</router-link>
+				<router-link to="/">Domov</router-link>
+				<router-link to="/about">O nás</router-link>
+				<router-link to="/search">Vyhladavanie</router-link>
 			</div>
 		</div>
 	</nav>

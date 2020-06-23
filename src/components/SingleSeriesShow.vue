@@ -11,6 +11,7 @@
 			"
 			:alt="this.result.name"
 		/>
+
 		<div v-else class="image empty-image ">
 			<p class="text">Neobsahuje</p>
 			<p>obrázok</p>
@@ -21,24 +22,26 @@
 				<p class="overview-text">{{ this.result.overview }}</p>
 			</article>
 			<div class="average">
-				<h1 class="average-text">
+				<article class="average-text">
 					<p>Užívateľské</p>
 					<p>hodnotenie</p>
-				</h1>
+				</article>
+				<h1 class="status">Stav: {{ seriesStatus }}</h1>
 				<average-vote
 					class="series-vote-average"
 					:voteAverage="this.result.vote_average"
 				/>
-				<h1>{{ this.result.status }}</h1>
 				<article class="genres-release-date">
 					<strong>Žáner: </strong>
-					<p
-						class="one-genre"
-						v-for="genre in this.result.genres"
-						:key="genre.id"
-					>
-						{{ genre.name }}
-					</p>
+					<ul>
+						<li
+							class="one-genre"
+							v-for="genre in this.result.genres"
+							:key="genre.id"
+						>
+							{{ genre.name }}
+						</li>
+					</ul>
 					<!-- <p class="dot">•</p> -->
 				</article>
 				<p class="air-date">
@@ -52,9 +55,11 @@
 		</main>
 		<movie-crew class="crew" :movieId="this.result.id" type="tv" />
 		<h1 class="title">Série</h1>
-		<div v-for="season in filterItems" :key="season.id">
-			<single-season :season="season.season_number" />
-		</div>
+		<single-season
+			v-for="season in filterItems"
+			:key="season.id"
+			:season="season.season_number"
+		/>
 	</div>
 </template>
 
@@ -81,11 +86,6 @@ export default {
 			}, 500)
 		}
 	},
-	computed: {
-		firstAirDate() {
-			return moment(this.result.first_air_date).format('DD MMM YYYY')
-		}
-	},
 	methods: {
 		filterSeasons() {
 			let filteredItem = []
@@ -95,6 +95,18 @@ export default {
 				}
 			})
 			this.filterItems = filteredItem
+		}
+	},
+	computed: {
+		seriesStatus() {
+			if (this.result.status == 'Ended') {
+				return 'Ukončený'
+			} else {
+				return 'Pokračujúci seriál'
+			}
+		},
+		firstAirDate() {
+			return moment(this.result.first_air_date).format('DD MMM YYYY')
 		}
 	}
 }
@@ -120,6 +132,7 @@ export default {
 		display: flex;
 	}
 }
+
 .title {
 	margin: em(30);
 }
@@ -154,11 +167,17 @@ export default {
 	flex-wrap: wrap;
 	flex-direction: column;
 	margin-top: em(40);
+	.status {
+		text-align: right;
+		// margin-top: em(20);
+	}
 	.average-text {
 		display: flex;
 		align-items: flex-start;
 		flex-direction: column;
+		flex-wrap: nowrap;
 		margin-left: em(80);
+
 		p {
 			margin-bottom: em(5);
 		}
@@ -173,10 +192,9 @@ export default {
 		display: flex;
 		margin-top: em(35);
 		.one-genre {
-			margin-right: em(10);
-		}
-		.dot {
-			margin: em(0) em(10);
+			margin-right: em(4);
+			height: 22px;
+			display: flex;
 		}
 	}
 }
