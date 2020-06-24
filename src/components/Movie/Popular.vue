@@ -1,8 +1,8 @@
 <template>
 	<transition out-in>
 		<div class="popular">
-			<h2 class="title" :v-model="timeWindow">
-				Populárne tento
+			<div class="title" :v-model="timeWindow">
+				Populárne filmy tento
 				<h2
 					@click=";(timeWindow = 'day'), toogleDay()"
 					:class="{ 'active-timeWindow': timeWindowDay }"
@@ -19,7 +19,7 @@
 				>
 					týždeň
 				</h2>
-			</h2>
+			</div>
 
 			<slider class="slider" :results="this.results" />
 		</div>
@@ -27,8 +27,8 @@
 </template>
 
 <script>
-import Mixins from '../mixins/Mixins.js'
-import Slider from '../components/Slider.vue'
+import Mixins from '../../mixins/Mixins.js'
+import Slider from '../Slider.vue'
 
 export default {
 	components: { Slider },
@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .title {
 	margin: auto;
 	h2 {

@@ -16,7 +16,10 @@
 				</div>
 				<article class="overview">
 					<h1 class="overview-title">Obsah</h1>
-					<p class="overview-text">{{ result.overview }}</p>
+					<p v-if="result.overview" class="overview-text">
+						{{ result.overview }}
+					</p>
+					<p v-else>Neobsahuje žiadny obsah .</p>
 				</article>
 
 				<div class="average">
@@ -40,7 +43,7 @@
 							</li>
 						</ul>
 					</article>
-					<p class="release-date">
+					<p v-if="this.result.release_date" class="release-date">
 						<strong> Dátum vydania: </strong
 						>{{ this.result.release_date }}
 					</p>
@@ -63,8 +66,8 @@
 
 <script>
 import moment from 'moment'
-import Mixins from '../mixins/Mixins.js'
-import AverageVote from './AverageVote.vue'
+import Mixins from '../../mixins/Mixins.js'
+import AverageVote from '../AverageVote.vue'
 import MovieCrew from './MovieCrew.vue'
 import MovieSimilar from './MovieSimilar'
 export default {
@@ -109,7 +112,7 @@ export default {
 				const response = await this.$axios.get(
 					`https://api.themoviedb.org/3/movie/${this.$route.query.id}?api_key=${this.$apiKey}&language=${this.language}&append_to_response=videos`
 				)
-				if (!response.data.overview) {
+				if (!response.data.overview && this.language == 'sk-SK') {
 					this.language = 'en'
 					this.getResult()
 				} else if (
@@ -134,7 +137,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 
 .empty-image {
 	width: em(300);

@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import Mixins from '../mixins/Mixins'
+import Mixins from '../../mixins/Mixins'
 import moment from 'moment'
 import { orderBy } from 'lodash'
 export default {
@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .person-playing {
 	margin-top: em(30);
 }

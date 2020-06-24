@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 
 .main-wrapper {
 	width: em(300);

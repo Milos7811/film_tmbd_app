@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .person-information {
 	width: em(300);
 	margin-right: em(15);

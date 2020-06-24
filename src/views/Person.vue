@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SinglePerson from '../components/SinglePerson'
+import SinglePerson from '../components/Actor/SinglePerson'
 export default {
 	components: { SinglePerson },
 	data() {

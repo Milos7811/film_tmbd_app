@@ -23,7 +23,7 @@
 <script>
 import iso3311a2 from 'iso-3166-1-alpha-2'
 import { debounce } from 'lodash'
-import PersonList from '../components/PersonList'
+import PersonList from './PersonList'
 export default {
 	components: { PersonList },
 	data() {
@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .input {
 	width: em(200);
 	height: em(48);

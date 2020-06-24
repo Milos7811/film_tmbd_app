@@ -19,7 +19,10 @@
 		<main>
 			<article class="overview">
 				<h1 class="overview-title">Obsah</h1>
-				<p class="overview-text">{{ this.result.overview }}</p>
+				<p v-if="this.result.overview" class="overview-text">
+					{{ this.result.overview }}
+				</p>
+				<p v-else>Neobsahuje žiadny obsah .</p>
 			</article>
 			<div class="average">
 				<article class="average-text">
@@ -60,17 +63,19 @@
 			:key="season.id"
 			:season="season.season_number"
 		/>
+		<similar-series />
 	</div>
 </template>
 
 <script>
-import SingleSeason from '../components/SingleSeason'
-import MovieCrew from '../components/MovieCrew'
+import SingleSeason from './SingleSeason'
+import MovieCrew from '../Movie/MovieCrew'
+import SimilarSeries from './SimilarSeries'
 import moment from 'moment'
-import AverageVote from '../components/AverageVote'
-import Mixins from '../mixins/Mixins'
+import AverageVote from '../AverageVote'
+import Mixins from '../../mixins/Mixins'
 export default {
-	components: { AverageVote, MovieCrew, SingleSeason },
+	components: { AverageVote, MovieCrew, SingleSeason, SimilarSeries },
 	mixins: [Mixins],
 	props: ['result'],
 	data() {
@@ -113,7 +118,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .empty-image {
 	width: em(300);
 	height: em(450);

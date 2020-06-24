@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<h2 v-if="this.results" class="title">Najlepšie hodnoteńe</h2>
-		<slider class="slider" :results="this.results" />
+		<h2 v-if="this.results" class="title">Najlepšie hodnoteńe seriály</h2>
+		<slider-series class="slider" :results="this.results" />
 	</div>
 </template>
 
 <script>
-import Slider from './Slider'
+import SliderSeries from './SliderSeries'
 export default {
 	components: {
-		Slider
+		SliderSeries
 	},
 	data() {
 		return {
@@ -23,7 +23,7 @@ export default {
 		async getResult() {
 			try {
 				const response = await this.$axios.get(
-					`https://api.themoviedb.org/3/movie/top_rated?api_key=${this.$apiKey}&page=1&region=sk`
+					`https://api.themoviedb.org/3/tv/top_rated?api_key=${this.$apiKey}&language=en-US&page=1`
 				)
 				this.results = response.data.results
 			} catch (error) {
@@ -35,7 +35,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .title {
 	margin: auto;
 }

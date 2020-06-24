@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import SingleSeriesShow from '../components/SingleSeriesShow'
+import SingleSeriesShow from '../components/Serie/SingleSeriesShow'
 export default {
 	name: 'SeriesShow',
 	components: { SingleSeriesShow },

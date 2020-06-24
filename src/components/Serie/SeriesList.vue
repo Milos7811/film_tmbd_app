@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import AverageVote from '../components/AverageVote'
-import Mixins from '../mixins/Mixins'
+import AverageVote from '../AverageVote'
+import Mixins from '../../mixins/Mixins'
 export default {
 	props: ['results'],
 	mixins: [Mixins],
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .empty-image {
 	width: em(150);
 	height: em(225);

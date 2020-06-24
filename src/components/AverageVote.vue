@@ -28,7 +28,10 @@ export default {
 		colorCircle() {
 			if (this.percentageValue >= 70) {
 				return 'teal'
-			} else if (this.percentageValue < 70) {
+			} else if (
+				this.percentageValue < 70 &&
+				this.percentageValue >= 30
+			) {
 				return 'yellow'
 			} else if (this.percentageValue <= 30) {
 				return 'red'

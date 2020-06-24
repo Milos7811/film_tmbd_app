@@ -6,22 +6,28 @@
 			<popular />
 			<top-rated />
 			<movie-upcoming />
+			<popular-series />
+			<top-rated-series />
 		</div>
 	</div>
 </template>
 
 <script>
 import FastSearch from '../components/FastSearch.vue'
-import Popular from '../components/Popular.vue'
-import TopRated from '../components/TopRated'
-import MovieUpcoming from '../components/MovieUpcoming'
+import Popular from '../components/Movie/Popular.vue'
+import TopRated from '../components/Movie/TopRated'
+import TopRatedSeries from '../components/Serie/TopRatedSeries'
+import MovieUpcoming from '../components/Movie/MovieUpcoming'
+import PopularSeries from '../components/Serie/PopularSeries'
 import HomeLogo from '../components/HomeLogo'
 export default {
 	components: {
 		FastSearch,
 		Popular,
 		TopRated,
+		TopRatedSeries,
 		MovieUpcoming,
+		PopularSeries,
 		HomeLogo
 	},
 	data() {

@@ -32,9 +32,9 @@
 </template>
 
 <script>
-import SearchPeople from '../components/SearchPeople'
-import SearchMovies from '../components/SearchMovies'
-import SearchSeries from '../components/SearchSeries'
+import SearchPeople from '../components/Actor/SearchPeople'
+import SearchMovies from '../components/Movie/SearchMovies'
+import SearchSeries from '../components/Serie/SearchSeries'
 export default {
 	components: { SearchMovies, SearchPeople, SearchSeries },
 	data() {

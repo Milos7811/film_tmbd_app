@@ -36,7 +36,7 @@
 						/>
 						<img
 							v-else
-							src="../assets/default_avatar.jpg"
+							src="../../assets/default_avatar.jpg"
 							class="image"
 						/>
 						<h5 class="real-name">
@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import Mixins from '../mixins/Mixins'
+import Mixins from '../../mixins/Mixins'
 export default {
 	props: ['results'],
 	mixins: [Mixins],
@@ -63,7 +63,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 
 .card {
 	overflow: hidden;

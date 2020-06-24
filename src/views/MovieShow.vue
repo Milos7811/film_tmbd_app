@@ -1,21 +1,21 @@
 <template>
-  <div class="content">
-    <single-movie-show />
-  </div>
+	<div class="content">
+		<single-movie-show />
+	</div>
 </template>
 
 <script>
-import SingleMovieShow from "../components/SingleMovieShow.vue";
+import SingleMovieShow from '../components/Movie/SingleMovieShow.vue'
 export default {
-  name: "MovieShow",
-  components: {
-    SingleMovieShow,
-  },
-};
+	name: 'MovieShow',
+	components: {
+		SingleMovieShow
+	}
+}
 </script>
 
 <style lang="scss" scoped>
 .content {
-  height: 100%;
+	height: 100%;
 }
 </style>

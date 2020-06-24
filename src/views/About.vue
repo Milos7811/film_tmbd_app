@@ -2,9 +2,10 @@
 	<div class="container">
 		<article>
 			<h1></h1>
-			<p>
-				Táto stránka bola vytvorená za účelom vytvorit svoj vlastný
-				projekt kďe budem môcť rozširovať svoje znalosti a skúsenosti oh
+			<p class="text">
+				Táto stránka bola vytvorená za účelom vytvoriť svoj vlastný
+				projekt kde si budem môcť rozširovať svoje znalosti a skúsenosti
+				ohľadom programovania webových stránok .
 			</p>
 		</article>
 	</div>
@@ -24,10 +25,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.ahoj {
-	margin-top: 400px;
-}
-.okno {
-	// min-height: 100%;
+.text {
+	max-width: 50%;
+	margin: auto;
+	text-align: left;
 }
 </style>

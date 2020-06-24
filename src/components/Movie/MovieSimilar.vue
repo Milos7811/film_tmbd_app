@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Slider from './Slider'
+import Slider from '../Slider'
 export default {
 	props: ['movieId', 'type'],
 	components: { Slider },
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .movie-similiar-wrapper {
 	min-height: em(250);
 	margin: em(20);

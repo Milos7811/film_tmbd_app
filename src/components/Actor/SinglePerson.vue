@@ -13,7 +13,7 @@
 			<v-img
 				max-width="300"
 				v-else
-				src="../assets/default_avatar.jpg"
+				src="../../assets/default_avatar.jpg"
 				alt=""
 			/>
 			<person-social-sites
@@ -39,9 +39,9 @@
 </template>
 
 <script>
-import PersonPlayingIn from '../components/PersonPlayingIn'
-import PersonSocialSites from '../components/PersonSocialSites'
-import Slider from './Slider'
+import PersonPlayingIn from './PersonPlayingIn'
+import PersonSocialSites from './PersonSocialSites'
+import Slider from '../Slider'
 import PersonInformation from './PersonInformation'
 import PersonPlayingInVue from './PersonPlayingIn.vue'
 export default {
@@ -91,11 +91,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 
-.main-wrapper {
-	// height: em(450);
-}
+// .main-wrapper {
+// 	// height: em(450);
+// }
 .social-sites {
 	max-height: em(59);
 	clear: both;

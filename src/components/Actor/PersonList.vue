@@ -17,7 +17,7 @@
 				"
 				ref="cardMouseOver"
 			/>
-			<img v-else src="../assets/default_avatar.jpg" class="image" />
+			<img v-else src="../../assets/default_avatar.jpg" class="image" />
 			<h5 class="real-name">
 				{{ shorten(result.name) }}
 			</h5>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import Mixins from '../mixins/Mixins'
+import Mixins from '../../mixins/Mixins'
 export default {
 	mixins: [Mixins],
 	props: ['results']
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .person-list-wrapper {
 	display: flex;
 	flex-direction: row;

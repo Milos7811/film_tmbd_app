@@ -1,7 +1,7 @@
 <template>
-	<div class="main">
+	<div>
 		<div class="inputs-wrapper">
-			<search-genres class="input" />
+			<search-genres class="select" />
 			<v-select
 				v-model="selectYear"
 				:items="yearsGenerator"
@@ -12,9 +12,9 @@
 				class="select"
 			>
 			</v-select>
-			<search-sort-by />
+			<search-sort-by class="select" />
 		</div>
-		<movie-list :results="this.results" />
+		<series-list :results="this.results" />
 		<v-pagination
 			class="pagination"
 			v-if="this.pageLength > 1"
@@ -27,37 +27,32 @@
 </template>
 
 <script>
-import { debounce } from 'lodash'
-import SearchGenres from '../components/SearchGenres'
-import MovieList from '../components/MovieList'
-import SearchSortBy from '../components/SearchSortBy'
+import SearchGenres from '../SearchGenres'
+import SearchSortBy from '../SearchSortBy'
+import SeriesList from './SeriesList'
 export default {
-	components: { SearchGenres, MovieList, SearchSortBy },
+	components: { SearchGenres, SearchSortBy, SeriesList },
 	data() {
 		return {
-			results: '',
-			movieName: '',
-			genresId: 28,
-			selectYear: '',
 			pageLength: '',
+			selectYear: '',
+			sortBy: 'popularity.desc',
+			genresId: 80,
 			page: 1,
-			sortBy: 'popularity.desc'
+			results: ''
 		}
 	},
 	watch: {
-		selectYear() {
-			this.getResult()
-		},
 		page() {
 			this.getResult()
 		},
 		sortBy() {
-			if (this.results) {
-				this.getResult()
-			}
+			this.getResult()
+		},
+		selectYear() {
+			this.getResult()
 		}
 	},
-
 	mounted() {
 		this.$root.$on('search-genres-id', data => {
 			this.genresId = data
@@ -69,16 +64,21 @@ export default {
 		this.getResult()
 	},
 	methods: {
-		search: debounce(function() {
-			this.getResult()
-		}, 500),
 		async getResult() {
+			let resultsArray = []
 			try {
 				const response = await this.$axios.get(
-					`https://api.themoviedb.org/3/discover/movie?api_key=${this.$apiKey}&language=sk-SK&sort_by=${this.sortBy}&include_adult=false&include_video=false&page=1&primary_release_year=${this.selectYear}&with_genres=${this.genresId}&page=${this.page}`
+					`https://api.themoviedb.org/3/discover/tv?api_key=${this.$apiKey}&language=en-US&sort_by=${this.sortBy}&first_air_date_year=${this.selectYear}&page=${this.page}&with_genres=${this.genresId}&include_null_first_air_dates=false`
 				)
-				this.results = response.data.results
+
+				response.data.results.forEach(element => {
+					if (element.overview) {
+						resultsArray.push(element)
+					}
+				})
 				this.pageLength = response.data.total_pages
+
+				this.results = resultsArray
 			} catch (error) {
 				console.log(error)
 			}
@@ -100,7 +100,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .select {
 	border-radius: em(20);
 	max-width: em(150);
@@ -108,46 +108,33 @@ export default {
 	margin-top: em(5);
 	padding: em(0) !important;
 }
-.pagination {
-	margin-top: em(30);
-	color: $navbar;
-}
-.main {
-	display: block;
-}
 .inputs-wrapper {
-	// height: em(48);
 	display: flex;
-	& > * {
+	.select {
 		margin: em(0) em(10);
 	}
 	@media (max-width: 500px) {
 		& {
+			// display: flex;
 			flex-direction: column;
+			align-items: center;
 		}
-		& > * {
-			margin: em(0) em(10);
-			color: $primary;
-			padding: em(10);
-			box-sizing: border-box;
-			@media (max-width: 500px) {
-				& {
-					margin: em(10) auto;
-				}
-			}
+		.select {
+			margin: em(10) em(0);
+			// margin: em(0) em(10);
+			// color: $primary;
+			// padding: em(10);
+			// box-sizing: border-box;
+			// margin: em(10) auto;
 		}
 	}
 }
+
 .input {
 	width: em(150);
 	height: em(48);
 	background-color: white;
 	border-radius: em(20);
 	outline: none;
-}
-@media screen and (max-width: 500px) {
-	.pagination {
-		color: blue !important;
-	}
 }
 </style>

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import SingleEpisode from '../components/SingleEpisode'
+import SingleEpisode from './SingleEpisode'
 import moment from 'moment'
 export default {
 	components: { SingleEpisode },
@@ -34,7 +34,12 @@ export default {
 				const response = await this.$axios.get(
 					`https://api.themoviedb.org/3/tv/${this.$route.query.id}/season/${this.season}?api_key=${this.$apiKey}&language=${this.language}`
 				)
-				this.results = response.data
+				if (!response.data.overview && this.language == 'sk-SK') {
+					this.language = 'en-US'
+					this.getResult()
+				} else {
+					this.results = response.data
+				}
 			} catch (error) {
 				console.log(error)
 			}
@@ -44,7 +49,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
 .card {
 	background-color: $primary !important;
 	color: $primary-text;

@@ -32,9 +32,15 @@
 							"
 							alt=""
 						/>
+						<div v-else class="image empty-image ">
+							<p class="text">Neobsahuje</p>
+							<p>obrázok</p>
+						</div>
 					</div>
 					<article class="article">
-						<p class="overview">{{ this.result.overview }}</p>
+						<p class="overview">
+							{{ this.result.overview }}
+						</p>
 						<p class="episode-count">
 							Počet epizód: {{ this.result.episodes.length }}
 						</p>
@@ -59,8 +65,8 @@
 </template>
 
 <script>
-import Mixins from '../mixins/Mixins'
-import SeriesEpisode from '../components/SeriesEpisode'
+import Mixins from '../../mixins/Mixins'
+import SeriesEpisode from './SeriesEpisode'
 import moment from 'moment'
 export default {
 	mixins: [Mixins],
@@ -112,7 +118,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
+.empty-image {
+	width: em(300);
+	height: em(450);
+	background-color: $primary;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	max-width: em(300);
+	float: left;
+	margin: em(0) em(15) em(0) em(0);
+	box-shadow: 0px 8px 8px -3px rgba(0, 0, 0, 0.6),
+		0px 10px 16px 1px rgba(0, 0, 0, 0.18),
+		0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
+	p {
+		display: flex;
+	}
+}
 
 .container {
 	// height: auto;
@@ -122,6 +146,7 @@ export default {
 }
 .wrapper-image-series {
 	display: flex;
+	align-items: center;
 }
 .full-wrapper {
 	// max-height: 300px;

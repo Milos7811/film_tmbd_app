@@ -3,7 +3,7 @@
 		<v-card class="card" tag="li">
 			<div class="top-content">
 				<v-skeleton-loader
-					v-if="!this.result.still_path"
+					v-if="!this.result.still_path && this.skeleton"
 					class="mx-auto image"
 					max-width="300"
 					type="image"
@@ -16,7 +16,10 @@
 					"
 					alt=""
 				/>
-
+				<div v-else class="image empty-image ">
+					<p class="text">Neobsahuje</p>
+					<p>obrázok</p>
+				</div>
 				<div class="info-group">
 					<average-vote
 						class="average"
@@ -36,14 +39,16 @@
 					</h1>
 					{{ this.result.name }}
 				</h1>
-				<p class="overview">{{ this.result.overview }}</p>
+				<p v-if="this.result.overview" class="overview">
+					{{ this.result.overview }}
+				</p>
 			</article>
 		</v-card>
 	</div>
 </template>
 
 <script>
-import AverageVote from '../components/AverageVote'
+import AverageVote from '../AverageVote'
 import moment from 'moment'
 
 export default {
@@ -53,7 +58,8 @@ export default {
 		return {
 			result: '',
 			isActive: false,
-			language: 'sk-SK'
+			language: 'sk-SK',
+			skeleton: true
 		}
 	},
 	mounted() {
@@ -71,12 +77,13 @@ export default {
 					`https://api.themoviedb.org/3/tv/${this.$route.query.id}/season/${this.season_number}/episode/${this.episode_number}?api_key=${this.$apiKey}&language=${this.language}`
 				)
 
-				// if (!response.data.overview && this.language == 'sk-SK') {
-				// 	this.language = 'en-US'
-				// 	this.getResult()
-				// } else {
-				this.result = response.data
-				// }
+				if (!response.data.overview && this.language == 'sk-SK') {
+					this.language = 'en-US'
+					this.getResult()
+				} else {
+					this.result = response.data
+					this.skeleton = false
+				}
 			} catch (error) {
 				console.log(error)
 			}
@@ -93,7 +100,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '../scss/app.scss';
+@import '../../scss/app.scss';
+
 .card {
 	background-color: $primary !important;
 	color: $primary-text;
@@ -129,20 +137,39 @@ export default {
 	.info-group {
 		display: flex;
 		align-items: center;
+		margin: auto;
 		.average {
 			margin: em(0) em(20);
 		}
 		@media (max-width: 615px) {
 			flex-direction: column;
 			.average {
-				margin: em(5) em(0);
+				// margin: em(5) em(0);
 			}
 		}
 	}
 	.image {
 		max-width: em(150);
+		margin: auto;
 	}
-
+	.empty-image {
+		width: em(150);
+		height: em(85);
+		background-color: $primary;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		float: left;
+		margin: em(10) auto;
+		box-shadow: 0px 8px 8px -3px rgba(0, 0, 0, 0.6),
+			0px 10px 16px 1px rgba(0, 0, 0, 0.18),
+			0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
+		p {
+			display: flex;
+		}
+	}
 	.date {
 		margin: 0px;
 	}
