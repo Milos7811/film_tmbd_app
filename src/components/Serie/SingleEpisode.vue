@@ -12,7 +12,7 @@
 					v-if="this.result.still_path"
 					class="image"
 					:src="
-						`http://image.tmdb.org/t/p/w500/${this.result.still_path}`
+						`https://image.tmdb.org/t/p/w500/${this.result.still_path}`
 					"
 					alt=""
 				/>
@@ -110,7 +110,8 @@ export default {
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
 		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
 		0px 3px 14px 2px rgba(0, 0, 0, 0.12) !important;
-	&:hover {
+	&:hover,
+	:focus {
 		box-shadow: 0px 8px 8px -3px rgba(0, 0, 0, 0.6),
 			0px 10px 16px 1px rgba(0, 0, 0, 0.18),
 			0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;

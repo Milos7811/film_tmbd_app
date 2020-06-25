@@ -13,7 +13,7 @@
 				v-if="result.profile_path"
 				class="image"
 				v-bind:src="
-					'http://image.tmdb.org/t/p/w500/' + result.profile_path
+					'https://image.tmdb.org/t/p/w500/' + result.profile_path
 				"
 				ref="cardMouseOver"
 			/>
@@ -47,16 +47,25 @@ export default {
 	overflow: hidden;
 	background-color: $navbar !important;
 	color: $primary-text !important;
+	@media (max-width: 600px) {
+		& {
+			max-width: 100px !important;
+			height: 200px !important;
+		}
+	}
 }
 .real-name {
 	font-size: em(15);
+	@media (max-width: 600px) {
+		font-size: em(12) !important;
+	}
 }
 
 .character-name {
 	font-size: em(14);
 }
 .image {
-	max-width: 150px;
+	max-width: 100%;
 	&:hover {
 		transition: all 0.2s;
 		transform: scale(1.1);

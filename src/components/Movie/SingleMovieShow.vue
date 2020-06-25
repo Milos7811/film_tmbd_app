@@ -234,14 +234,5 @@ export default {
 		height: 100%;
 		border: 0;
 	}
-	// max-width: em(960);
-	// max-height: em(565);
-	// margin: em(50) auto;
-	// .video-player {
-	// 	min-width: 100%;
-	// 	min-height: 100%;
-	// 	margin: auto;
-	// 	display: block;
-	// }
 }
 </style>

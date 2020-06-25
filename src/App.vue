@@ -1,7 +1,7 @@
 <template>
 	<v-app id="app" dark v-cloak>
 		<navigation class="navigation" />
-		<v-container>
+		<v-container class="router-view">
 			<v-overlay z-index="10" opacity="1" v-show="loader">
 				<v-progress-circular
 					indeterminate
@@ -12,7 +12,7 @@
 			<transition name="fade" mode="out-in">
 				<router-view class="router-view " />
 			</transition>
-			<fast-movie-preview />
+			<!-- <fast-movie-preview /> -->
 		</v-container>
 		<footer-component />
 	</v-app>
@@ -21,7 +21,7 @@
 <script>
 import FooterComponent from './components/FooterComponent'
 import Navigation from './components/Navigation'
-import FastMoviePreview from './components/FastMoviePreview'
+// import FastMoviePreview from './components/FastMoviePreview'
 
 export default {
 	name: 'App',
@@ -32,14 +32,15 @@ export default {
 	},
 	components: {
 		Navigation,
-		FastMoviePreview,
+		// FastMoviePreview,
 		FooterComponent
 	},
 
 	created() {
-		setTimeout(() => {
-			this.loader = false
-		}, 2000)
+		;(document.title = 'Moje-Filmy'),
+			setTimeout(() => {
+				this.loader = false
+			}, 2000)
 	}
 }
 </script>
@@ -52,6 +53,7 @@ export default {
 }
 .router-view {
 	margin-top: em(60) !important;
+	// position: relative;
 }
 
 #app {

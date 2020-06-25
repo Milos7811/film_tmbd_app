@@ -17,9 +17,10 @@
 				>
 					<div class="content">
 						<img
+							class="image"
 							v-if="result.poster_path"
 							v-bind:src="
-								'http://image.tmdb.org/t/p/w500/' +
+								'https://image.tmdb.org/t/p/w500/' +
 									result.poster_path
 							"
 							width="150px"
@@ -28,7 +29,7 @@
 							v-else-if="result.profile_path"
 							class="image"
 							v-bind:src="
-								'http://image.tmdb.org/t/p/w500/' +
+								'https://image.tmdb.org/t/p/w500/' +
 									result.profile_path
 							"
 							width="150px"
@@ -147,6 +148,15 @@ export default {
 	p {
 		display: flex;
 	}
+	@media (max-width: 600px) {
+		& {
+			max-width: 100px !important;
+			height: 200px !important;
+		}
+	}
+}
+.image {
+	max-width: 100%;
 }
 
 .list {
@@ -166,10 +176,19 @@ export default {
 	.card {
 		background-color: $navbar !important;
 		color: $primary-text;
+		@media (max-width: 600px) {
+			& {
+				max-width: 100px !important;
+				height: 200px !important;
+			}
+		}
 	}
 }
 
 .fast-title {
 	@include clearfix;
+	@media (max-width: 600px) {
+		font-size: em(12) !important;
+	}
 }
 </style>

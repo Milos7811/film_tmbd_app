@@ -28,7 +28,7 @@
 							v-if="this.result.poster_path"
 							class="image"
 							:src="
-								`http://image.tmdb.org/t/p/w500/${this.result.poster_path}`
+								`https://image.tmdb.org/t/p/w500/${this.result.poster_path}`
 							"
 							alt=""
 						/>

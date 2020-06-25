@@ -7,7 +7,7 @@
 			class="series-image"
 			v-if="this.result.poster_path"
 			:src="
-				`http://image.tmdb.org/t/p/original/${this.result.poster_path} `
+				`https://image.tmdb.org/t/p/original/${this.result.poster_path} `
 			"
 			:alt="this.result.name"
 		/>

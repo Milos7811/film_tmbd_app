@@ -1,24 +1,32 @@
 <template>
 	<div class="container">
-		<div class="search-what">
-			<h1
-				v-bind:class="{ active: movies }"
-				@click=";(movies = true), (people = false), (series = false)"
-			>
-				Filmy
-			</h1>
-			<h1
-				v-bind:class="{ active: people }"
-				@click=";(movies = false), (people = true), (series = false)"
-			>
-				Herci
-			</h1>
-			<h1
-				v-bind:class="{ active: series }"
-				@click=";(movies = false), (people = false), (series = true)"
-			>
-				Seriály
-			</h1>
+		<div class="search-what-container">
+			<div class="search-what">
+				<h1
+					v-bind:class="{ active: movies }"
+					@click="
+						;(movies = true), (people = false), (series = false)
+					"
+				>
+					Filmy
+				</h1>
+				<h1
+					v-bind:class="{ active: people }"
+					@click="
+						;(movies = false), (people = true), (series = false)
+					"
+				>
+					Herci
+				</h1>
+				<h1
+					v-bind:class="{ active: series }"
+					@click="
+						;(movies = false), (people = false), (series = true)
+					"
+				>
+					Seriály
+				</h1>
+			</div>
 		</div>
 
 		<div class="wrapper-search">
@@ -56,6 +64,9 @@ export default {
 @import '../scss/app.scss';
 .active {
 	border-bottom: 1px solid $primary-text;
+}
+.search-what-container {
+	display: block;
 }
 .search-what {
 	display: inline-flex;

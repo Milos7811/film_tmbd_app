@@ -7,7 +7,7 @@
 				class="profile-image"
 				v-if="this.result.profile_path"
 				:src="
-					`http://image.tmdb.org/t/p/w500/${this.result.profile_path} `
+					`https://image.tmdb.org/t/p/w500/${this.result.profile_path} `
 				"
 			/>
 			<v-img

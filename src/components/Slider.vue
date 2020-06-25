@@ -44,7 +44,7 @@
 									v-if="result.poster_path && !skeleton"
 									class="image"
 									v-bind:src="
-										'http://image.tmdb.org/t/p/w500/' +
+										'https://image.tmdb.org/t/p/w500/' +
 											result.poster_path
 									"
 									ref="cardMouseOver"

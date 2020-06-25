@@ -20,7 +20,7 @@
 							class="image"
 							v-if="result.poster_path"
 							v-bind:src="
-								'http://image.tmdb.org/t/p/w500/' +
+								'https://image.tmdb.org/t/p/w500/' +
 									result.poster_path
 							"
 							width="150px"
@@ -55,7 +55,8 @@ export default {
 @import '../../scss/app.scss';
 
 .image {
-	height: em(225);
+	max-width: 100%;
+	max-height: em(225);
 }
 .empty-image {
 	width: em(150);
@@ -68,6 +69,12 @@ export default {
 	align-items: center;
 	p {
 		display: flex;
+	}
+	@media (max-width: 600px) {
+		& {
+			max-width: 100px !important;
+			height: 200px !important;
+		}
 	}
 }
 .search {
@@ -91,12 +98,20 @@ ul {
 	.card {
 		background-color: $navbar !important;
 		color: $primary-text;
+		@media (max-width: 600px) {
+			& {
+				max-width: 100px !important;
+				height: 200px !important;
+			}
+		}
 	}
 }
 
 .fast-title {
-	// clear: both;
 	@include clearfix;
+	@media (max-width: 600px) {
+		font-size: em(12) !important;
+	}
 }
 .fade-enter-active,
 .fade-leave-active {

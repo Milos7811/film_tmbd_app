@@ -13,7 +13,7 @@
 				v-show="this.image && !this.skeleton"
 				v-if="this.image"
 				class="image"
-				:src="`http://image.tmdb.org/t/p/original/${this.image} `"
+				:src="`https://image.tmdb.org/t/p/original/${this.image} `"
 				alt=""
 			/>
 			<!-- </div> -->

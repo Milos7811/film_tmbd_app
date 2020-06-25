@@ -2,15 +2,15 @@
 	<div>
 		<div class="person-information">
 			<h1 class="main-title">Osobne informacie</h1>
-			<h3
+			<!-- <h3
 				v-if="this.result.known_for_department"
 				class="person-information-title"
 			>
 				Známy/-a vďaka
-			</h3>
-			<p class="person-information-text">
+			</h3> -->
+			<!-- <p class="person-information-text">
 				{{ this.result.known_for_department }}
-			</p>
+			</p> -->
 			<!-- <p v-if="dataBirthday" class="person-information-text"></p> -->
 			<h3 v-if="this.result.birthday" class="person-information-title">
 				Dátum narodenia

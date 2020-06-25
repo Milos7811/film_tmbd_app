@@ -19,7 +19,7 @@
 						class="image"
 						v-if="result.poster_path"
 						v-bind:src="
-							'http://image.tmdb.org/t/p/w500/' +
+							'https://image.tmdb.org/t/p/w500/' +
 								result.poster_path
 						"
 						width="150px"
@@ -67,7 +67,7 @@ export default {
 	}
 }
 .image {
-	height: em(225);
+	max-width: 100%;
 }
 .image-holder {
 	width: em(150);
@@ -93,11 +93,19 @@ ul {
 	.card {
 		background-color: $navbar !important;
 		color: $primary-text;
+		@media (max-width: 600px) {
+			& {
+				max-width: 100px !important;
+				height: 200px !important;
+			}
+		}
 	}
 }
 
 .fast-title {
-	// clear: both;
 	@include clearfix;
+	@media (max-width: 600px) {
+		font-size: em(12) !important;
+	}
 }
 </style>
