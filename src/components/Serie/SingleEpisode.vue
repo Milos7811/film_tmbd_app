@@ -144,9 +144,6 @@ export default {
 		}
 		@media (max-width: 615px) {
 			flex-direction: column;
-			.average {
-				// margin: em(5) em(0);
-			}
 		}
 	}
 	.image {

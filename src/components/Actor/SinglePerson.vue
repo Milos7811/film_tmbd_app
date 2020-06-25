@@ -2,7 +2,7 @@
 	<div>
 		<h1 class="name">{{ this.result.name }}</h1>
 		<div class="main-wrapper">
-			<v-img
+			<img
 				max-width="300"
 				class="profile-image"
 				v-if="this.result.profile_path"
@@ -10,7 +10,8 @@
 					`https://image.tmdb.org/t/p/w500/${this.result.profile_path} `
 				"
 			/>
-			<v-img
+			<img
+				class="profile-image"
 				max-width="300"
 				v-else
 				src="../../assets/default_avatar.jpg"
@@ -130,7 +131,7 @@ export default {
 	float: left;
 	margin: em(0) em(15) em(30) em(0);
 
-	max-width: 100%;
-	max-height: 100%;
+	max-width: em(350);
+	max-height: em(450);
 }
 </style>

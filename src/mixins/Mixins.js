@@ -36,7 +36,7 @@ export default {
 				return (this.fulllVideoPath =
 					'https://www.youtube.com/embed/' +
 					videoPath +
-					'?autoplay=1&showinfo=0&enablejsapi=1&origin=http://localhost:9000')
+					'?autoplay=1&showinfo=0&enablejsapi=1&origin=https://www.moje-filmy.sk/')
 			} catch (error) {
 				console.log('Error v getVideo')
 			}

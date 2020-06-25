@@ -12,7 +12,7 @@
 			<transition name="fade" mode="out-in">
 				<router-view class="router-view " />
 			</transition>
-			<!-- <fast-movie-preview /> -->
+			<fast-movie-preview />
 		</v-container>
 		<footer-component />
 	</v-app>
@@ -21,7 +21,7 @@
 <script>
 import FooterComponent from './components/FooterComponent'
 import Navigation from './components/Navigation'
-// import FastMoviePreview from './components/FastMoviePreview'
+import FastMoviePreview from './components/FastMoviePreview'
 
 export default {
 	name: 'App',
@@ -32,15 +32,14 @@ export default {
 	},
 	components: {
 		Navigation,
-		// FastMoviePreview,
+		FastMoviePreview,
 		FooterComponent
 	},
 
 	created() {
-		;(document.title = 'Moje-Filmy'),
-			setTimeout(() => {
-				this.loader = false
-			}, 2000)
+		setTimeout(() => {
+			this.loader = false
+		}, 2000)
 	}
 }
 </script>
@@ -53,6 +52,11 @@ export default {
 }
 .router-view {
 	margin-top: em(60) !important;
+	@media (max-width: 390) {
+		& {
+			margin-top: em(200) !important;
+		}
+	}
 	// position: relative;
 }
 
