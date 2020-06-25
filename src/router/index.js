@@ -57,12 +57,6 @@ const routes = [
 			),
 		props: true
 	}
-	// {
-	// 	path: '/search/movies',
-	// 	name: 'SearchMovies',
-	// 	component: SearchMovies,
-	// 	props: true
-	// }
 ]
 
 const router = new VueRouter({

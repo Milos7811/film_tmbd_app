@@ -21,7 +21,6 @@
 </template>
 
 <script>
-import iso3311a2 from 'iso-3166-1-alpha-2'
 import { debounce } from 'lodash'
 import PersonList from './PersonList'
 export default {
