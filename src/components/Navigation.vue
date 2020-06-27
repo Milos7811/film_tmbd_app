@@ -1,7 +1,7 @@
 <template>
 	<nav id="nav" class="navigation">
 		<div class="container nav-content ">
-			<div class="nav-logo">
+			<div @click="goToHome()" class="nav-logo">
 				<div class="logo-text">
 					<p>M</p>
 					oje-
@@ -39,6 +39,11 @@ export default {
 	methods: {
 		toogleSearch() {
 			this.showSearch = !this.showSearch
+		},
+		goToHome() {
+			if (this.$route.path != '/') {
+				this.$router.push({ path: '/' })
+			}
 		}
 	}
 }
@@ -54,6 +59,7 @@ export default {
 	justify-content: center;
 	position: absolute;
 	display: flex;
+	cursor: pointer;
 	margin-left: em(30);
 	white-space: nowrap;
 	background-color: $primary;
@@ -61,7 +67,9 @@ export default {
 	.logo-text {
 		display: inline-flex;
 		p {
+			// font-size: em(30, 25);
 			color: $navbar;
+			margin: 0px;
 		}
 	}
 	@media (max-width: 950px) {

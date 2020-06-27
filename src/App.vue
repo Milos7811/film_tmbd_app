@@ -52,10 +52,9 @@ export default {
 }
 .router-view {
 	margin-top: em(60) !important;
-	@media (max-width: 390) {
-		& {
-			margin-top: em(200) !important;
-		}
+
+	@media (max-width: 390px) {
+		margin-top: em(120) !important;
 	}
 	// position: relative;
 }

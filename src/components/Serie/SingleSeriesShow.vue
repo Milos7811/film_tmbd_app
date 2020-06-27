@@ -16,6 +16,10 @@
 			<p class="text">Neobsahuje</p>
 			<p>obrázok</p>
 		</div>
+		<series-network
+			class="series-networks"
+			:results="this.result.networks"
+		/>
 		<main>
 			<article class="overview">
 				<h1 class="overview-title">Obsah</h1>
@@ -71,11 +75,18 @@
 import SingleSeason from './SingleSeason'
 import MovieCrew from '../Movie/MovieCrew'
 import SimilarSeries from './SimilarSeries'
+import SeriesNetwork from './SeriesNetwork'
 import moment from 'moment'
 import AverageVote from '../AverageVote'
 import Mixins from '../../mixins/Mixins'
 export default {
-	components: { AverageVote, MovieCrew, SingleSeason, SimilarSeries },
+	components: {
+		AverageVote,
+		MovieCrew,
+		SingleSeason,
+		SimilarSeries,
+		SeriesNetwork
+	},
 	mixins: [Mixins],
 	props: ['result'],
 	data() {
@@ -154,13 +165,15 @@ export default {
 }
 .series-image {
 	max-width: em(300);
+	margin: auto;
 	float: left;
 	margin: em(0) em(15) em(0) em(0);
 }
 .overview {
+	min-width: em(280);
 	margin: em(15);
 	text-align: left;
-	// float: right;
+	display: flow-root;
 	.overview-title {
 		font-size: em(20);
 		margin-bottom: em(10);
