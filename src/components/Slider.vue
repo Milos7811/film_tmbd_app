@@ -56,12 +56,7 @@
 									<p class="text">Neobsahuje</p>
 									<p>obrázok</p>
 								</div>
-								<!-- <img
-								v-if="!result.poster_path"
-								class="image"
-								src="../assets/empty_image.png"
-								alt=""
-							/> -->
+
 								<average-vote
 									class="vote-average"
 									:voteAverage="result.vote_average"

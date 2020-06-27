@@ -12,7 +12,7 @@
 			<div class="links">
 				<router-link class="route" to="/">Domov</router-link>
 				<router-link class="route" to="/search"
-					>Vyhladavanie</router-link
+					>Vyhľadávanie</router-link
 				>
 				<router-link class="route" to="/about">O nás</router-link>
 			</div>

@@ -15,10 +15,21 @@ export default {
 			language: 'sk-SK'
 		}
 	},
+	watch: {
+		$route: {
+			handler: function(id) {
+				this.reset()
+			}
+		}
+	},
 	mounted() {
 		this.getResult()
 	},
 	methods: {
+		reset() {
+			Object.assign(this.$data, this.$options.data())
+			this.getResult()
+		},
 		async getResult() {
 			try {
 				const response = await this.$axios.get(

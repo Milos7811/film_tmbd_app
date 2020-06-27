@@ -23,10 +23,6 @@ export default {
 			if (value) {
 				this.getResult(value)
 			}
-		},
-
-		isActive(value) {
-			console.log(this.isActive)
 		}
 	},
 

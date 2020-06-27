@@ -47,6 +47,10 @@
 						<strong> Dátum vydania: </strong
 						>{{ this.result.release_date }}
 					</p>
+					<p class="runtime" v-if="this.result.runtime">
+						<Strong>Dĺžka filmu:</Strong>
+						{{ this.result.runtime }} min.
+					</p>
 				</div>
 			</main>
 			<div class="video-wraper" v-if="this.fulllVideoPath">
@@ -161,7 +165,11 @@ export default {
 	min-height: em(450);
 }
 .release-date {
-	margin: em(20) em(0);
+	margin: em(15) em(0);
+	text-align: left;
+}
+.runtime {
+	margin: em(15) em(0);
 	text-align: left;
 }
 .title-name {
@@ -189,7 +197,7 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: column;
-	margin-top: em(40);
+	margin-top: em(30);
 	.average-text {
 		display: flex;
 		align-items: flex-start;

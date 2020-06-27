@@ -33,7 +33,6 @@ export default {
 					`https://api.themoviedb.org/3/network/${this.result.id}?api_key=${this.$apiKey}`
 				)
 				this.resultNetwork = response.data
-				console.log(this.result)
 			} catch (error) {
 				console.log(error)
 			}
@@ -47,6 +46,7 @@ export default {
 .wrapper {
 	max-width: em(80);
 	max-height: em(50);
+	overflow: hidden;
 }
 .network-logo {
 	width: 100%;
