@@ -56,6 +56,13 @@ const routes = [
 				/* webpackChunkName: "SeriesShow" */ '../views/SeriesShow.vue'
 			),
 		props: true
+	},
+
+	{
+		path: '*',
+		name: 'NotFound',
+		component: () =>
+			import(/* webpackChunkName: "notFound" */ '../views/NotFound.vue')
 	}
 ]
 

@@ -22,7 +22,7 @@ export default {
 			}
 		}
 	},
-	mounted() {
+	created() {
 		this.getResult()
 	},
 	methods: {

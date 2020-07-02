@@ -1,6 +1,6 @@
 <template>
 	<nav id="nav" class="navigation">
-		<div class="container nav-content ">
+		<div class="nav-content ">
 			<div @click="goToHome()" class="nav-logo">
 				<div class="logo-text">
 					<p>M</p>
@@ -82,29 +82,33 @@ export default {
 }
 .nav-content {
 	display: flex;
-	margin: em(0) auto !important ;
-	@media (max-width: 950px) {
+	margin: em(15) 0px;
+	@media (max-width: 980px) {
 		& {
 			flex-direction: column;
+			margin: em(10) 0px;
 		}
 	}
 }
-nav {
-	// position: relative;
+.navigation {
+	position: absolute;
 	background-color: $navbar;
-	width: 100%;
+	width: 100% !important;
 	min-height: 60px;
 	color: white;
-	margin-bottom: em(10);
-	position: relative;
+	padding: 0px em(50);
+	// margin-bottom: em(10);
+	margin: auto;
 	a {
 		text-decoration: none;
 		font-size: em(20);
-		margin-right: em(40, 20);
 		color: $primary-text;
+		@media (min-width: 456px) {
+			margin-right: em(40, 20);
+		}
 		&:last-child {
 			margin-right: 0px;
-			@media (max-width: 390px) {
+			@media (max-width: 455px) {
 				margin: auto;
 			}
 		}
@@ -116,22 +120,22 @@ nav {
 .links {
 	margin-top: em(10, 20);
 	margin: auto;
-	float: left;
-	margin: auto;
 	color: $primary-text;
 	background: transparent;
-	@media (max-width: 390px) {
+	@media (max-width: 455px) {
 		& {
 			display: flex;
 			flex-direction: column;
-			& > * {
-				margin-bottom: em(4);
-			}
 		}
 	}
 	@media (max-width: 355px) {
 		& > * {
 			display: inline-block;
+		}
+	}
+	@media (max-width: 950px) {
+		& {
+			margin-bottom: em(10);
 		}
 	}
 }
@@ -148,47 +152,11 @@ nav {
 			0px 10px 16px 1px rgba(0, 0, 0, 0.18),
 			0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
 	}
-	@media (max-width: 390px) {
+	@media (max-width: 455px) {
 		& {
-			margin: auto;
-			margin-bottom: em(5);
+			margin: 0px auto 5px;
+			// margin-bottom: em(5);
 		}
-	}
-}
-.search-bar {
-	width: 35%;
-	margin-bottom: em(20);
-	float: right;
-
-	.search-input {
-		width: 90%;
-		background-color: white;
-		border-radius: em(20);
-		outline: none;
-		padding: em(8);
-		color: black;
-		transition: all 0.5 ease-in;
-	}
-	.magnify-icon {
-		font-size: em(35);
-		float: right;
-		color: white;
-		cursor: pointer;
-	}
-
-	.fade-enter-active {
-		transition: all 0.3s ease-in;
-	}
-	.fade-leave-active {
-		transition: all 0.3s ease-out;
-	}
-	.fade-enter {
-		transform-origin: right;
-		transform: scaleX(0);
-		opacity: 0;
-	}
-	.fade-leave-to {
-		opacity: 0;
 	}
 }
 </style>

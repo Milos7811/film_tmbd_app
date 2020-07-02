@@ -181,6 +181,10 @@ export default {
 	max-width: 300px;
 	float: left;
 	margin: em(0) em(15) em(0) em(0);
+	@media (max-width: 701px) {
+		float: none;
+		margin: auto;
+	}
 }
 .overview {
 	min-width: em(245);

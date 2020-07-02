@@ -13,7 +13,7 @@ export default {
 			result: ''
 		}
 	},
-	mounted() {
+	created() {
 		this.getResult()
 	},
 	methods: {

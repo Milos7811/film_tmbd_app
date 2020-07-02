@@ -52,8 +52,10 @@ export default {
 			skeleton: true
 		}
 	},
-	mounted() {
+	created() {
 		this.getResult()
+	},
+	mounted() {
 		setTimeout(() => {
 			this.skeleton = false
 		}, 2000)

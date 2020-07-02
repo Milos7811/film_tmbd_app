@@ -22,7 +22,7 @@ export default {
 			select: ''
 		}
 	},
-	mounted() {
+	created() {
 		this.getGenres()
 	},
 	watch: {

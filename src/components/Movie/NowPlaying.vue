@@ -16,7 +16,7 @@ export default {
 			results: ''
 		}
 	},
-	mounted() {
+	created() {
 		this.getResult()
 	},
 	methods: {

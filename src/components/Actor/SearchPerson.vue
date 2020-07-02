@@ -11,11 +11,12 @@ export default {
 			people: ''
 		}
 	},
+	created() {
+		this.getResult()
+	},
 	mounted() {
 		this.$root.$on('search-people-id', data => {
 			this.peopleId = data.toString()
-
-			this.getResult()
 		})
 	},
 	methods: {

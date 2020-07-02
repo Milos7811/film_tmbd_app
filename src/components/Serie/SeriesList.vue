@@ -60,10 +60,17 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-
+	border-bottom: 1px solid $primary;
 	align-items: center;
 	p {
 		display: flex;
+	}
+	@media (max-width: 600px) {
+		& {
+			max-width: 100px !important;
+			height: 200px !important;
+			max-height: em(150);
+		}
 	}
 }
 .image {
@@ -83,6 +90,8 @@ ul {
 	justify-content: center;
 	align-items: flex-start;
 	align-content: space-between;
+	border-bottom: 1px solid $primary;
+
 	a {
 		margin-top: em(15);
 		margin-right: em(15);
@@ -106,6 +115,11 @@ ul {
 	@include clearfix;
 	@media (max-width: 600px) {
 		font-size: em(12) !important;
+	}
+	@media (max-width: 600px) {
+		height: em(47);
+		font-size: em(12) !important;
+		overflow: hidden;
 	}
 }
 </style>

@@ -57,6 +57,9 @@ export default {
 			}
 		}
 	},
+	created() {
+		this.getResult()
+	},
 
 	mounted() {
 		this.$root.$on('search-genres-id', data => {
@@ -66,7 +69,6 @@ export default {
 		this.$root.$on('search-sort-by', data => {
 			this.sortBy = data
 		})
-		this.getResult()
 	},
 	methods: {
 		search: debounce(function() {
@@ -116,8 +118,8 @@ export default {
 	display: block;
 }
 .inputs-wrapper {
-	// height: em(48);
 	display: flex;
+	justify-content: center;
 	& > * {
 		margin: em(0) em(10);
 	}

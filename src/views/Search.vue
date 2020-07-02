@@ -1,8 +1,32 @@
 <template>
-	<div class="container">
-		<div class="search-what-container">
-			<div class="search-what">
-				<h1
+	<div>
+		<!-- <div class="search-what-container"> -->
+		<div class="search-what">
+			<v-tabs
+				v-model="tabs"
+				background-color="transparent"
+				color="#d1e8e2"
+				dark
+				centered
+			>
+				<v-tab href="#movies">
+					<h1>
+						Filmy
+					</h1></v-tab
+				>
+				<v-tab href="#actors">
+					<h1>
+						Herci
+					</h1></v-tab
+				>
+				<v-tab href="#series">
+					<h1>
+						Seriály
+					</h1></v-tab
+				>
+				<v-tabs-slider color="rgb(155, 46, 46)"></v-tabs-slider>
+			</v-tabs>
+			<!-- <h1
 					v-bind:class="{ active: movies }"
 					@click="
 						;(movies = true), (people = false), (series = false)
@@ -25,17 +49,17 @@
 					"
 				>
 					Seriály
-				</h1>
-			</div>
+				</h1> -->
 		</div>
+		<!-- </div> -->
 
-		<div class="wrapper-search">
-			<transition name="fade" mode="out-in">
-				<search-movies id="movies" v-if="this.movies" />
-				<search-people id="people" v-if="this.people" />
-				<search-series id="series" v-if="this.series" />
-			</transition>
-		</div>
+		<!-- <div class="wrapper-search"> -->
+		<transition name="fade" mode="out-in">
+			<search-movies id="movies" v-if="this.tabs === 'movies'" />
+			<search-people id="people" v-if="this.tabs === 'actors'" />
+			<search-series id="series" v-if="this.tabs === 'series'" />
+		</transition>
+		<!-- </div> -->
 	</div>
 </template>
 
@@ -49,7 +73,8 @@ export default {
 		return {
 			movies: true,
 			people: false,
-			series: false
+			series: false,
+			tabs: null
 		}
 	},
 	methods: {
@@ -62,16 +87,20 @@ export default {
 
 <style lang="scss" scoped>
 @import '../scss/app.scss';
-.active {
-	border-bottom: 1px solid $primary-text;
+
+a.v-tab {
+	padding: 0px;
 }
-.search-what-container {
-	display: block;
+
+v-tab {
+	margin: auto;
 }
+
 .search-what {
 	display: inline-flex;
 	flex-wrap: wrap;
 	margin-bottom: em(40);
+	font-size: em(15);
 	& > * {
 		margin-right: em(20);
 		font-size: em(20);

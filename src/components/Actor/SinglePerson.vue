@@ -102,10 +102,17 @@ export default {
 	clear: both;
 	float: left;
 	margin-right: em(15);
+	@media (max-width: 706px) {
+		float: none;
+		margin: auto;
+	}
 }
 
 .movieCredit {
 	margin: em(15);
+	@media (max-width: 900px) {
+		clear: both;
+	}
 	.movieCredit-title {
 		font-size: em(20);
 		text-align: left;
@@ -116,7 +123,10 @@ export default {
 	}
 }
 .biography {
+	min-width: em(250);
 	text-align: left;
+	display: flow-root;
+
 	.biography-title {
 		font-size: em(20);
 		margin: em(15);
@@ -128,10 +138,13 @@ export default {
 }
 
 .profile-image {
-	float: left;
-	margin: em(0) em(15) em(30) em(0);
-
 	max-width: em(350);
 	max-height: em(450);
+	float: left;
+	margin: em(0) em(15) em(30) em(0);
+	@media (max-width: 706px) {
+		float: none;
+		margin: auto;
+	}
 }
 </style>

@@ -21,17 +21,16 @@ export default {
 	height: 50px;
 	clear: both;
 	float: left;
-	border: 1px solid $navbar;
+	background-color: white;
+	border: 2px solid $navbar;
 	border-top: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	justify-content: space-around;
+	@media (max-width: 741px) {
+		float: none;
+		margin: auto;
+	}
 }
-// .network {
-// display: flex;
-// flex-wrap: wrap;
-// align-items: center;
-// align-content: stretch;
-// }
 </style>

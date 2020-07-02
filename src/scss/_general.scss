@@ -9,10 +9,15 @@ html {
 	font-family: 'Open Sans', sans-serif;
 	scroll-behavior: smooth;
 }
+ul {
+	padding: 0px;
+}
 
 .container {
-	min-height: 95%;
-	max-width: 1400px;
+	// min-height: 88% !important;
+	// width: 0px;
+	width: 100% !important;
+	max-width: 1400px !important;
 	margin: em(0) auto;
 
 	// margin-top: em(60);

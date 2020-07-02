@@ -1,6 +1,8 @@
 <template>
 	<v-app id="app" dark v-cloak>
 		<navigation class="navigation" />
+		<!-- <div class="empty-element"></div> -->
+
 		<v-container class="router-view">
 			<v-overlay z-index="10" opacity="1" v-show="loader">
 				<v-progress-circular
@@ -13,6 +15,7 @@
 				<router-view class="router-view " />
 			</transition>
 			<!-- <fast-movie-preview /> -->
+			<flash-message v-if="!this.loader" />
 		</v-container>
 		<footer-component />
 	</v-app>
@@ -21,6 +24,7 @@
 <script>
 import FooterComponent from './components/FooterComponent'
 import Navigation from './components/Navigation'
+import FlashMessage from './components/FlashMessage'
 // import FastMoviePreview from './components/FastMoviePreview'
 
 export default {
@@ -33,6 +37,7 @@ export default {
 	components: {
 		Navigation,
 		// FastMoviePreview,
+		FlashMessage,
 		FooterComponent
 	},
 
@@ -46,21 +51,24 @@ export default {
 
 <style lang="scss" scoped>
 @import './scss/app.scss';
+
 .navigation {
-	position: fixed;
+	width: 100% !important;
+	// position: fixed;
 	z-index: 20;
 }
 .router-view {
 	margin-top: em(60) !important;
+	min-height: 88%;
 
-	@media (max-width: 390px) {
+	@media (max-width: 455px) {
 		margin-top: em(120) !important;
 	}
 	// position: relative;
 }
 
 #app {
-	width: 100%;
+	// width: 100%;
 	// height: 100%;
 	font-family: 'Open Sans', sans-serif;
 

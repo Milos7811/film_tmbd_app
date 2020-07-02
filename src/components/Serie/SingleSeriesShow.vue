@@ -147,6 +147,10 @@ export default {
 	p {
 		display: flex;
 	}
+	@media (max-width: 741px) {
+		float: none;
+		margin: auto;
+	}
 }
 
 .title {
@@ -163,11 +167,16 @@ export default {
 .series-title {
 	font-size: em(30);
 }
+
 .series-image {
 	max-width: em(300);
 	margin: auto;
 	float: left;
 	margin: em(0) em(15) em(0) em(0);
+	@media (max-width: 741px) {
+		float: none;
+		margin: auto;
+	}
 }
 .overview {
 	min-width: em(280);

@@ -110,6 +110,7 @@ export default {
 }
 .inputs-wrapper {
 	display: flex;
+	justify-content: center;
 	.select {
 		margin: em(0) em(10);
 	}
