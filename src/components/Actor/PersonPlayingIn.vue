@@ -1,5 +1,8 @@
 <template>
-	<div class="person-playing">
+	<div
+		class="person-playing"
+		v-if="this.movieRoles && this.movieRoles.length > 0"
+	>
 		<h1 class="main-title">Hral/-a</h1>
 		<div class="wrapper">
 			<ul class="list">

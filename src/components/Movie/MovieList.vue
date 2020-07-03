@@ -111,6 +111,7 @@ ul {
 
 .fast-title {
 	margin: 0px;
+	overflow: hidden;
 	@include clearfix;
 	@media (max-width: 600px) {
 		height: em(47);

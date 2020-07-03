@@ -1,7 +1,7 @@
 <template>
 	<nav id="nav" class="navigation">
 		<div class="nav-content ">
-			<div @click="goToHome()" class="nav-logo">
+			<div @click="goToHome()" class="nav-logo border-animate">
 				<div class="logo-text">
 					<p>M</p>
 					oje-
@@ -14,7 +14,7 @@
 				<router-link class="route" to="/search"
 					>Vyhľadávanie</router-link
 				>
-				<router-link class="route" to="/about">O nás</router-link>
+				<router-link class="route" to="/about">O mne</router-link>
 			</div>
 		</div>
 	</nav>
@@ -63,7 +63,7 @@ export default {
 	margin-left: em(30);
 	white-space: nowrap;
 	background-color: $primary;
-	border-radius: em(20, 25);
+	animation: borderanimation;
 	.logo-text {
 		display: inline-flex;
 		p {
@@ -72,7 +72,7 @@ export default {
 			margin: 0px;
 		}
 	}
-	@media (max-width: 950px) {
+	@media (max-width: 1100px) {
 		& {
 			position: relative;
 			margin: auto;
@@ -83,7 +83,7 @@ export default {
 .nav-content {
 	display: flex;
 	margin: em(15) 0px;
-	@media (max-width: 980px) {
+	@media (max-width: 1100px) {
 		& {
 			flex-direction: column;
 			margin: em(10) 0px;
@@ -97,20 +97,29 @@ export default {
 	min-height: 60px;
 	color: white;
 	padding: 0px em(50);
-	// margin-bottom: em(10);
+
 	margin: auto;
 	a {
 		text-decoration: none;
 		font-size: em(20);
 		color: $primary-text;
-		@media (min-width: 456px) {
-			margin-right: em(40, 20);
-		}
 		&:last-child {
 			margin-right: 0px;
-			@media (max-width: 455px) {
-				margin: auto;
+			@media (max-width: 396px) {
+				margin: em(4) auto;
 			}
+		}
+		@media (min-width: 495px) {
+			margin-right: em(40, 20) !important;
+		}
+		@media (max-width: 495px) and (min-width: 436px) {
+			margin-right: em(20, 20) !important;
+		}
+		@media (max-width: 436px) and (min-width: 397px) {
+			margin-right: em(5, 20) !important;
+		}
+		@media (max-width: 396px) {
+			margin: em(4) auto;
 		}
 	}
 	.router-link-exact-active {
@@ -122,7 +131,7 @@ export default {
 	margin: auto;
 	color: $primary-text;
 	background: transparent;
-	@media (max-width: 455px) {
+	@media (max-width: 396px) {
 		& {
 			display: flex;
 			flex-direction: column;
@@ -133,7 +142,7 @@ export default {
 			display: inline-block;
 		}
 	}
-	@media (max-width: 950px) {
+	@media (max-width: 1100px) {
 		& {
 			margin-bottom: em(10);
 		}
@@ -141,7 +150,7 @@ export default {
 }
 .route {
 	padding: em(5);
-	border-radius: em(10);
+	border-radius: em(2);
 	transition: all 0.2s ease-in;
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
 		0px 8px 10px 1px rgba(0, 0, 0, 0.14),
@@ -152,11 +161,48 @@ export default {
 			0px 10px 16px 1px rgba(0, 0, 0, 0.18),
 			0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
 	}
-	@media (max-width: 455px) {
+	@media (max-width: 396px) {
 		& {
-			margin: 0px auto 5px;
+			// margin: 0px auto 5px;
 			// margin-bottom: em(5);
 		}
 	}
+}
+
+.border-animate:before {
+	position: absolute;
+	content: '';
+	height: 0;
+	width: 0;
+	left: 0;
+	top: 0;
+	border: 2px solid transparent;
+}
+.border-animate:after {
+	position: absolute;
+	content: '';
+	height: 0;
+	width: 0;
+	right: 0;
+	bottom: 0;
+	border: 2px solid transparent;
+}
+.border-animate:hover:before,
+:focus:before {
+	height: 40px;
+	width: 200px;
+	border: 2px solid $primary-text;
+	border-right: none;
+	border-bottom: none;
+	transition: height 0.5s linear, width 0.5s linear 0.5s;
+}
+.border-animate:hover:after,
+:focus:after {
+	height: 40px;
+	width: 200px;
+	border: 2px solid $primary-text;
+	border-left: none;
+	border-top: none;
+	transition: height 0.5s linear, width 0.5s linear 0.5s;
 }
 </style>

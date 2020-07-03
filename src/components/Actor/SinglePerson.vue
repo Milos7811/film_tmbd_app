@@ -27,7 +27,10 @@
 				<h2 class="biography-title">Biografia</h2>
 				<p class="biography-text">{{ this.result.biography }}</p>
 			</article>
-			<div v-if="this.movieCredit" class="movieCredit">
+			<div
+				v-if="this.movieCredit && this.movieCredit.length > 0"
+				class="movieCredit"
+			>
 				<h1 class="movieCredit-title">Známy/-a vďaka</h1>
 				<slider
 					class="movieCredit-slider"

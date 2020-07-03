@@ -1,5 +1,8 @@
 <template>
-	<v-responsive v-if="this.results[0]" class="movie-similiar-wrapper">
+	<v-responsive
+		v-if="this.results && this.results.length > 0"
+		class="movie-similiar-wrapper"
+	>
 		<h1 class="title">Podobné filmy</h1>
 
 		<slider :results="this.results" />

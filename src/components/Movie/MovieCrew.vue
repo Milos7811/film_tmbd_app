@@ -1,5 +1,8 @@
 <template>
-	<div v-if="this.results.cast" min-height="200">
+	<div
+		v-if="this.results.cast && this.results.cast.length > 0"
+		min-height="200"
+	>
 		<h1 class="title">Hlavne obsadenie</h1>
 		<v-lazy
 			v-model="isActive"

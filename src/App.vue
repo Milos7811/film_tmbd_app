@@ -54,22 +54,19 @@ export default {
 
 .navigation {
 	width: 100% !important;
-	// position: fixed;
+
 	z-index: 20;
 }
 .router-view {
 	margin-top: em(60) !important;
 	min-height: 88%;
 
-	@media (max-width: 455px) {
+	@media (max-width: 396px) {
 		margin-top: em(120) !important;
 	}
-	// position: relative;
 }
 
 #app {
-	// width: 100%;
-	// height: 100%;
 	font-family: 'Open Sans', sans-serif;
 
 	// font-family: Avenir, Helvetica, Arial, sans-serif;
