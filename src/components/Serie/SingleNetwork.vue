@@ -1,7 +1,11 @@
 <template>
 	<div>
 		<div class="wrapper">
-			<a :href="`${this.resultNetwork.homepage}`">
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				:href="`${this.resultNetwork.homepage}`"
+			>
 				<img
 					class="network-logo"
 					:src="

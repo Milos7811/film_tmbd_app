@@ -15,7 +15,11 @@
 				</h1>
 				<div class="tech-wrapper">
 					<p>Vue</p>
-					<a href="https://vuejs.org/">
+					<a
+						target="_blank"
+						rel="noopener noreferrer"
+						href="https://vuejs.org/"
+					>
 						<v-icon class="vue-icon scale" alt="Vue" size="35">
 							{{ mdiVue }}
 						</v-icon></a
@@ -25,7 +29,11 @@
 					<p>
 						Vuetify
 					</p>
-					<a href="https://vuetifyjs.com ">
+					<a
+						target="_blank"
+						rel="noopener noreferrer"
+						href="https://vuetifyjs.com "
+					>
 						<v-icon
 							class="vuetify-icon scale"
 							alt="Vuetify"
@@ -40,7 +48,11 @@
 			<h1>
 				Použitá databáza
 			</h1>
-			<a href="https://www.themoviedb.org/">
+			<a
+				target="_blank"
+				rel="noopener noreferrer"
+				href="https://www.themoviedb.org/"
+			>
 				<img
 					class="tmdb-icon scale"
 					src="https://www.themoviedb.org/assets/2/v4/logos/v2/blue_square_1-5bdc75aaebeb75dc7ae79426ddd9be3b2be1e342510f8202baf6bffa71d7f5c4.svg"
@@ -57,19 +69,29 @@
 						>milosholba78@gmail.com</a
 					>
 				</p>
-				<a href="https://github.com/Milos7811">
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://github.com/Milos7811"
+				>
 					<v-icon class="github-icon scale" size="35">{{
 						mdiGithub
 					}}</v-icon></a
 				>
 				<a
+					target="_blank"
+					rel="noopener noreferrer"
 					href="https://www.linkedin.com/in/milo%C5%A1-holba-565a7b198/"
 				>
 					<v-icon class="linkedin-icon scale" size="35">{{
 						mdiLinkedin
 					}}</v-icon>
 				</a>
-				<a href="https://www.facebook.com/milos.holba/">
+				<a
+					target="_blank"
+					rel="noopener noreferrer"
+					href="https://www.facebook.com/milos.holba/"
+				>
 					<v-icon class="facebook-icon scale" size="35">{{
 						mdiFacebook
 					}}</v-icon>

@@ -9,18 +9,24 @@
 			"
 		>
 			<a
+				target="_blank"
+				rel="noopener noreferrer"
 				v-if="this.result.facebook_id"
 				:href="'https://www.facebook.com/' + this.result.facebook_id"
 			>
 				<v-icon class="icon" size="35">{{ iconFacebook }}</v-icon>
 			</a>
 			<a
+				target="_blank"
+				rel="noopener noreferrer"
 				v-if="this.result.instagram_id"
 				:href="'https://www.instagram.com/' + this.result.instagram_id"
 			>
 				<v-icon class="icon" size="35">{{ iconInstagram }}</v-icon>
 			</a>
 			<a
+				target="_blank"
+				rel="noopener noreferrer"
 				v-if="this.result.twitter_id"
 				:href="'https://www.twitter.com/' + this.result.twitter_id"
 			>
