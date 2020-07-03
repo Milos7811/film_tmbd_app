@@ -141,7 +141,7 @@ export default {
 		font-size: em(35);
 		float: right;
 		margin: em(5);
-
+		position: absolute;
 		color: white;
 		cursor: pointer;
 	}

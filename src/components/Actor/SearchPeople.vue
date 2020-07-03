@@ -1,13 +1,22 @@
 <template>
 	<div>
-		<input
-			placeholder="Meno"
-			v-model="query"
-			type="text"
-			class="input"
-			@keydown="search"
-		/>
-
+		<div class="input-wrapper">
+			<input
+				placeholder="Meno"
+				v-model="query"
+				type="text"
+				class="input"
+				@keydown="search"
+				@keydown.esc="resetQuery()"
+			/>
+			<v-icon
+				v-show="this.query"
+				@click="query = ''"
+				class="magnify-icon"
+				right
+				>{{ iconClose }}</v-icon
+			>
+		</div>
 		<person-list :results="this.results" />
 		<v-pagination
 			class="pagination"
@@ -23,6 +32,8 @@
 <script>
 import { debounce } from 'lodash'
 import PersonList from './PersonList'
+import { mdiClose } from '@mdi/js'
+
 export default {
 	components: { PersonList },
 	data() {
@@ -30,7 +41,8 @@ export default {
 			query: '',
 			results: '',
 			pageLength: '',
-			page: 1
+			page: 1,
+			iconClose: mdiClose
 		}
 	},
 	watch: {
@@ -77,6 +89,10 @@ export default {
 			} catch (error) {
 				console.log(error)
 			}
+		},
+		resetQuery() {
+			this.query = ''
+			this.getPopular()
 		}
 	}
 }
@@ -84,6 +100,18 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/app.scss';
+.input-wrapper {
+	max-width: em(250);
+	margin: auto;
+}
+
+.magnify-icon {
+	font-size: em(35);
+	margin: em(5);
+	color: white;
+	cursor: pointer;
+	position: absolute;
+}
 .input {
 	width: em(200);
 	height: em(48);
