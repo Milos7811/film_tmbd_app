@@ -52,6 +52,6 @@ export default {
 	// margin-top: 300px;
 }
 .title {
-	text-align: left;
+	text-align: center;
 }
 </style>
