@@ -134,14 +134,14 @@ export default {
 	}
 }
 .facebook-icon {
-	color: #0676e8;
+	color: #0676e8 !important;
 }
 .linkedin-icon {
-	color: #0077b5;
+	color: #0077b5 !important;
 }
 .github-icon {
 	width: em(30);
-	color: $primary-text;
+	color: $primary-text !important;
 }
 
 .wrapper {
@@ -160,10 +160,10 @@ export default {
 	margin: em(20) 0px;
 }
 .vue-icon {
-	color: #41b883;
+	color: #41b883 !important;
 }
 .vuetify-icon {
-	color: #1696f5;
+	color: #1696f5 !important;
 }
 .text {
 	// max-width: 50%;
