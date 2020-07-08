@@ -20,7 +20,7 @@
 			v-if="this.pageLength > 1"
 			v-model="page"
 			:length="pageLength"
-			:total-visible="7"
+			total-visible="10"
 			color="rgb(155, 46, 46)"
 		></v-pagination>
 	</div>
@@ -47,12 +47,14 @@ export default {
 	watch: {
 		selectYear() {
 			this.getResult()
+			this.page = 1
 		},
 		page() {
-			this.getResult()
+			this.paginate()
 		},
 		sortBy() {
 			if (this.results) {
+				this.page = 1
 				this.getResult()
 			}
 		}
@@ -64,6 +66,7 @@ export default {
 	mounted() {
 		this.$root.$on('search-genres-id', data => {
 			this.genresId = data
+			this.page = 1
 			this.getResult()
 		})
 		this.$root.$on('search-sort-by', data => {
@@ -71,9 +74,10 @@ export default {
 		})
 	},
 	methods: {
-		search: debounce(function() {
+		paginate: debounce(function() {
 			this.getResult()
-		}, 500),
+		}, 300),
+
 		async getResult() {
 			try {
 				const response = await this.$axios.get(
@@ -112,7 +116,10 @@ export default {
 }
 .pagination {
 	margin-top: em(30);
-	color: $navbar;
+	color: $navbar !important;
+	li {
+		transform: scale(0.8);
+	}
 }
 .main {
 	display: block;
@@ -149,7 +156,7 @@ export default {
 }
 @media screen and (max-width: 500px) {
 	.pagination {
-		color: blue !important;
+		// color: blue !important;
 	}
 }
 </style>

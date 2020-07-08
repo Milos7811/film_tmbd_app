@@ -96,21 +96,25 @@ export default {
 	watch: {
 		query(value) {
 			if (value) {
+				this.page = 1
 				this.search()
 			}
 		},
 		page() {
-			this.getResult()
+			this.paginate()
 		}
 	},
 	methods: {
+		paginate: debounce(function() {
+			this.getResult()
+		}, 300),
 		search: debounce(function() {
 			this.getResult()
 		}, 500),
 		getResult() {
 			this.$axios
 				.get(
-					`https://api.themoviedb.org/3/search/multi?api_key=${this.$apiKey}&language=en-US&query=${this.query}&page=${this.page}&include_adult=false`
+					`https://api.themoviedb.org/3/search/multi?api_key=${this.$apiKey}&language=sk-SK&query=${this.query}&page=${this.page}&include_adult=false`
 				)
 				.then(response => {
 					this.results = response.data.results

@@ -1,6 +1,6 @@
 <template>
 	<transition name="rerender" mode="out-in">
-		<div v-cloak class="content">
+		<div v-cloak>
 			<h2 class="title-name">{{ this.result.title }}</h2>
 			<main class="main">
 				<div class="image-wrapper">

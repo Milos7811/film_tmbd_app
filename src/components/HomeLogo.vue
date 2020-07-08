@@ -135,6 +135,7 @@ export default {
 		outline: none;
 		padding: em(8);
 		color: black;
+		border: 1px solid $primary;
 		transition: all 0.5 ease-in;
 	}
 	.magnify-icon {

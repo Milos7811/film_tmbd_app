@@ -47,15 +47,13 @@ export default {
 	},
 	watch: {
 		page() {
-			if (this.query) {
-				this.getResult()
-			} else if (!this.query) {
-				this.getPopular()
-			}
+			this.paginate()
 		},
 		query() {
 			if (!this.query) {
 				this.getPopular()
+			} else {
+				this.search()
 			}
 		}
 	},
@@ -63,6 +61,13 @@ export default {
 		this.getPopular()
 	},
 	methods: {
+		paginate: debounce(function() {
+			if (this.query) {
+				this.search()
+			} else if (!this.query) {
+				this.getPopular()
+			}
+		}, 300),
 		search: debounce(function() {
 			if (this.query) {
 				this.getResult()

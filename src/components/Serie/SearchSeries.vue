@@ -20,6 +20,7 @@
 			v-if="this.pageLength > 1"
 			v-model="page"
 			:length="pageLength"
+			aria-setsize="4"
 			:total-visible="7"
 			color="rgb(155, 46, 46)"
 		></v-pagination>
@@ -30,6 +31,7 @@
 import SearchGenres from '../SearchGenres'
 import SearchSortBy from '../SearchSortBy'
 import SeriesList from './SeriesList'
+import { debounce } from 'lodash'
 export default {
 	components: { SearchGenres, SearchSortBy, SeriesList },
 	data() {
@@ -44,18 +46,21 @@ export default {
 	},
 	watch: {
 		page() {
-			this.getResult()
+			this.paginate()
 		},
 		sortBy() {
+			this.page = 1
 			this.getResult()
 		},
 		selectYear() {
+			this.page = 1
 			this.getResult()
 		}
 	},
 	mounted() {
 		this.$root.$on('search-genres-id', data => {
 			this.genresId = data
+			this.page = 1
 			this.getResult()
 		})
 		this.$root.$on('search-sort-by', data => {
@@ -64,6 +69,9 @@ export default {
 		this.getResult()
 	},
 	methods: {
+		paginate: debounce(function() {
+			this.getResult()
+		}, 300),
 		async getResult() {
 			let resultsArray = []
 			try {
