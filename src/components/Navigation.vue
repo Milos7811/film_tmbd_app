@@ -62,6 +62,7 @@ export default {
 	cursor: pointer;
 	margin-left: em(30);
 	white-space: nowrap;
+	border-radius: em(5);
 	background-color: $primary;
 	animation: borderanimation;
 	.logo-text {
@@ -150,7 +151,7 @@ export default {
 }
 .route {
 	padding: em(5);
-	border-radius: em(2);
+	border-radius: em(5);
 	transition: all 0.2s ease-in;
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
 		0px 8px 10px 1px rgba(0, 0, 0, 0.14),

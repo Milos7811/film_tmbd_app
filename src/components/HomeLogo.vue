@@ -105,6 +105,9 @@ export default {
 	height: 100%;
 	max-height: em(450);
 	margin: auto;
+	// border-radius: em(10);
+	border-bottom-right-radius: em(10);
+	border-bottom-left-radius: em(10);
 
 	.image {
 		width: 100%;
