@@ -62,10 +62,10 @@ export default {
 
 	computed: {
 		dataBirthday() {
-			return moment(this.result.birthday).format('DD MMM YYYY')
+			return moment(this.result.birthday).format('DD.MM.YYYY')
 		},
 		dateDeath() {
-			return moment(this.result.deathday).format('DD MMM YYYY')
+			return moment(this.result.deathday).format('DD.MM.YYYY')
 		}
 	},
 	methods: {

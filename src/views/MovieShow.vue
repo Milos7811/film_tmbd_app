@@ -16,6 +16,6 @@ export default {
 
 <style lang="scss" scoped>
 .content {
-	height: 100%;
+	// height: 100%;
 }
 </style>

@@ -111,15 +111,16 @@ export default {
 		search: debounce(function() {
 			this.getResult()
 		}, 500),
-		getResult() {
-			this.$axios
-				.get(
+		async getResult() {
+			try {
+				const response = await this.$axios.get(
 					`https://api.themoviedb.org/3/search/multi?api_key=${this.$apiKey}&language=sk-SK&query=${this.query}&page=${this.page}&include_adult=false`
 				)
-				.then(response => {
-					this.results = response.data.results
-					this.pageLength = response.data.total_pages
-				})
+				this.results = response.data.results
+				this.pageLength = response.data.total_pages
+			} catch (error) {
+				console.log(error)
+			}
 		},
 		goUrl(result) {
 			if (result.media_type == 'movie') {

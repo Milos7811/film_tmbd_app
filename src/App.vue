@@ -58,8 +58,11 @@ export default {
 	z-index: 20;
 }
 .router-view {
-	margin-top: em(60) !important;
+	margin-top: em(30) !important;
 	min-height: 88%;
+	@media (max-width: 1101px) {
+		margin-top: em(58) !important;
+	}
 
 	@media (max-width: 396px) {
 		margin-top: em(120) !important;

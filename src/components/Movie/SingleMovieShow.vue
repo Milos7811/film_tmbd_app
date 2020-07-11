@@ -44,8 +44,7 @@
 						</ul>
 					</article>
 					<p v-if="this.result.release_date" class="release-date">
-						<strong> Dátum vydania: </strong
-						>{{ this.result.release_date }}
+						<strong> Dátum vydania: </strong>{{ releaseDate }}
 					</p>
 					<p class="runtime" v-if="this.result.runtime">
 						<Strong>Dĺžka filmu:</Strong>
@@ -89,8 +88,8 @@ export default {
 		}
 	},
 	computed: {
-		releaseData() {
-			return moment(this.result.release_date).format('DD MMM YYYY')
+		releaseDate() {
+			return moment(this.result.release_date).format('DD.MM.YYYY')
 		}
 	},
 

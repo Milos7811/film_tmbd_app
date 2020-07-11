@@ -52,7 +52,7 @@
 					<!-- <p class="dot">•</p> -->
 				</article>
 				<p class="air-date">
-					<strong> Dátum prvého vydania:</strong> {{ firstAirDate }}
+					<strong> Dátum vydania:</strong> {{ firstAirDate }}
 				</p>
 				<p class="original-name">
 					<strong> Pôvodný názov:</strong>
@@ -122,7 +122,7 @@ export default {
 			}
 		},
 		firstAirDate() {
-			return moment(this.result.first_air_date).format('DD MMM YYYY')
+			return moment(this.result.first_air_date).format('DD.MM.YYYY')
 		}
 	}
 }

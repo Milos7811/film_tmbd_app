@@ -109,13 +109,13 @@ export default {
 				margin: em(4) auto;
 			}
 		}
-		@media (min-width: 495px) {
+		@media (min-width: 502px) {
 			margin-right: em(40, 20) !important;
 		}
-		@media (max-width: 495px) and (min-width: 436px) {
+		@media (max-width: 502px) and (min-width: 442px) {
 			margin-right: em(20, 20) !important;
 		}
-		@media (max-width: 436px) and (min-width: 397px) {
+		@media (max-width: 442px) and (min-width: 397px) {
 			margin-right: em(5, 20) !important;
 		}
 		@media (max-width: 396px) {

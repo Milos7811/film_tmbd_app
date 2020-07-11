@@ -45,7 +45,7 @@
 							Počet epizód: {{ this.result.episodes.length }}
 						</p>
 						<p>
-							Dátum prvého vydania:
+							Dátum vydania:
 							{{ firstAirDate(this.result.air_date) }}
 						</p>
 					</article>
@@ -89,7 +89,7 @@ export default {
 
 	methods: {
 		firstAirDate(date) {
-			return moment(date).format('DD MMM YYYY')
+			return moment(date).format('DD.MM.YYYY')
 		},
 		activeSeasonsToogle(id) {
 			if (this.activeSeasons == id) {
