@@ -68,12 +68,11 @@ export default {
 	.logo-text {
 		display: inline-flex;
 		p {
-			// font-size: em(30, 25);
-			color: $navbar;
+			color: lighten($navbar, 15%);
 			margin: 0px;
 		}
 	}
-	@media (max-width: 1100px) {
+	@media (max-width: 1250px) {
 		& {
 			position: relative;
 			margin: auto;
@@ -84,7 +83,7 @@ export default {
 .nav-content {
 	display: flex;
 	margin: em(15) 0px;
-	@media (max-width: 1100px) {
+	@media (max-width: 1250px) {
 		& {
 			flex-direction: column;
 			margin: em(10) 0px;
@@ -98,29 +97,27 @@ export default {
 	min-height: 60px;
 	color: white;
 	padding: 0px em(50);
-
 	margin: auto;
 	a {
 		text-decoration: none;
 		font-size: em(20);
 		color: $primary-text;
 		&:last-child {
-			margin-right: 0px;
-			@media (max-width: 396px) {
-				margin: em(4) auto;
-			}
+			margin-right: 0px !important;
 		}
+
 		@media (min-width: 502px) {
 			margin-right: em(40, 20) !important;
 		}
 		@media (max-width: 502px) and (min-width: 442px) {
 			margin-right: em(20, 20) !important;
 		}
-		@media (max-width: 442px) and (min-width: 397px) {
-			margin-right: em(5, 20) !important;
-		}
-		@media (max-width: 396px) {
-			margin: em(4) auto;
+		// @media (max-width: 442px) and (min-width: 397px) {
+		// 	margin-right: em(5, 20) !important;
+		// }
+
+		@media (min-width: 665px) {
+			margin-right: em(140, 20) !important;
 		}
 	}
 	.router-link-exact-active {
@@ -132,21 +129,8 @@ export default {
 	margin: auto;
 	color: $primary-text;
 	background: transparent;
-	@media (max-width: 396px) {
-		& {
-			display: flex;
-			flex-direction: column;
-		}
-	}
-	@media (max-width: 355px) {
-		& > * {
-			display: inline-block;
-		}
-	}
-	@media (max-width: 1100px) {
-		& {
-			margin-bottom: em(10);
-		}
+	@media (max-width: 442px) {
+		display: none;
 	}
 }
 .route {
@@ -161,12 +145,6 @@ export default {
 		box-shadow: 0px 8px 8px -3px rgba(0, 0, 0, 0.6),
 			0px 10px 16px 1px rgba(0, 0, 0, 0.18),
 			0px 4px 20px 3px rgba(0, 0, 0, 0.2) !important;
-	}
-	@media (max-width: 396px) {
-		& {
-			// margin: 0px auto 5px;
-			// margin-bottom: em(5);
-		}
 	}
 }
 

@@ -15,7 +15,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../scss/app.scss';
 .content {
-	// height: 100%;
+	@media (min-width: 450px) {
+		padding: em(40) !important;
+	}
 }
 </style>

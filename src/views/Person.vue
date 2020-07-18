@@ -1,5 +1,5 @@
 <template class="container">
-	<div>
+	<div class="content">
 		<single-person :result="this.result" />
 	</div>
 </template>
@@ -31,4 +31,11 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import '../scss/app.scss';
+.content {
+	@media (min-width: 450px) {
+		padding: em(40) !important;
+	}
+}
+</style>

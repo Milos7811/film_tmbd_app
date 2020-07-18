@@ -147,6 +147,8 @@ export default {
 		margin: em(5);
 		position: absolute;
 		color: white;
+		background-color: $primary;
+		border-radius: em(50, 35);
 		cursor: pointer;
 	}
 

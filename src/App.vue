@@ -1,8 +1,14 @@
 <template>
 	<v-app id="app" dark v-cloak>
+		<v-icon
+			size="30"
+			v-show="!sideBar"
+			class="icon-list"
+			@click="sideBar = true"
+			>{{ iconList }}</v-icon
+		>
+		<side-navbar v-show="sideBar" />
 		<navigation class="navigation" />
-		<!-- <div class="empty-element"></div> -->
-
 		<v-container class="router-view">
 			<v-overlay z-index="10" opacity="1" v-show="loader">
 				<v-progress-circular
@@ -25,32 +31,58 @@
 import FooterComponent from './components/FooterComponent'
 import Navigation from './components/Navigation'
 import FlashMessage from './components/FlashMessage'
+import SideNavbar from './components/SideNavbar'
+import { mdiViewList } from '@mdi/js'
+
 // import FastMoviePreview from './components/FastMoviePreview'
 
 export default {
 	name: 'App',
 	data() {
 		return {
-			loader: true
+			loader: true,
+			sideBar: true,
+			iconList: mdiViewList
 		}
 	},
 	components: {
 		Navigation,
 		// FastMoviePreview,
 		FlashMessage,
-		FooterComponent
+		FooterComponent,
+		SideNavbar
 	},
 
 	created() {
 		setTimeout(() => {
 			this.loader = false
 		}, 2000)
+	},
+	mounted() {
+		this.$root.$on('navBarStatus', data => {
+			this.sideBar = data
+		})
 	}
 }
 </script>
 
 <style lang="scss" scoped>
 @import './scss/app.scss';
+
+.icon-list {
+	color: $primary-text;
+	position: fixed;
+
+	z-index: 30;
+	top: 30px;
+	right: 10px;
+	border: 1px solid $primary;
+	background-color: $primary;
+	border-radius: 50px;
+	@media (min-width: 443px) {
+		display: none;
+	}
+}
 
 .navigation {
 	width: 100% !important;
@@ -62,10 +94,6 @@ export default {
 	min-height: 88%;
 	@media (max-width: 1101px) {
 		margin-top: em(58) !important;
-	}
-
-	@media (max-width: 396px) {
-		margin-top: em(120) !important;
 	}
 }
 

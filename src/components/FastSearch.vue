@@ -148,6 +148,7 @@ export default {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	border-bottom: 1px solid $primary;
 
 	align-items: center;
 	p {
@@ -156,7 +157,7 @@ export default {
 	@media (max-width: 600px) {
 		& {
 			max-width: 100px !important;
-			height: 200px !important;
+			max-height: 150px !important;
 		}
 	}
 }

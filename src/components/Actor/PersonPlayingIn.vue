@@ -70,12 +70,24 @@ export default {
 	padding: em(20);
 }
 
+.info-wrapper:nth-child(2n + 1) {
+	background-color: $navbar;
+}
+.info-wrapper:nth-child(2n + 2) {
+	background-color: $primary;
+}
+
 .info-wrapper {
 	display: inline-flex;
 	flex-wrap: wrap;
 	text-align: left;
 	line-height: em(20);
 	margin-bottom: em(10);
+
+	p {
+		margin: 0px;
+	}
+
 	.info-title {
 		cursor: pointer;
 		display: inline-table;
