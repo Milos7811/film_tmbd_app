@@ -41,7 +41,7 @@ export default {
 	data() {
 		return {
 			loader: true,
-			sideBar: true,
+			sideBar: false,
 			iconList: mdiViewList
 		}
 	},
