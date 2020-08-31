@@ -147,6 +147,8 @@ export default {
 .wrapper-image-series {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
 }
 .full-wrapper {
 	// max-height: 300px;
